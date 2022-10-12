@@ -1,0 +1,52 @@
+<ion-content>
+  
+        <!-- Begin page content -->
+        <main class="flex-shrink-0 main has-footer">
+            <!-- Fixed navbar -->
+            <ion-header class="header">
+                <div class="row">
+                    <div class="col-auto px-0">
+                        <button class="btn btn-40 btn-link back-btn" type="button" (click)="goto_login()">
+                        <ion-icon style="font-size: 20px"  name="arrow-back-sharp"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="text-left col align-self-center">
+                       
+                    </div>
+                    <!-- <div class="ml-auto col-auto align-self-center" (click)="goto_login()">
+                        <button  class="btn btn-default rounded btn-block">Sign in</button> 
+                    </div> -->
+                </div>
+            </ion-header>
+            
+            
+            <div class="container h-100 text-white">
+                <div class="row h-100">
+                    <div class="col-12 align-self-center mb-4">
+                        <div class="row justify-content-center">
+                            <div class="col-11 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                                <h2 class="font-weight-normal mb-3">Please Verify<br>Your Email First</h2>
+                                <p class="mb-5">We have sent you an email with verification code on your provided email.</p>
+                                <div class="form-group float-label active">
+                                    <input type="text" [(ngModel)]="VerificationCode" class="form-control text-white">
+                                    <label class="form-control-label text-white">Enter Verification Code</label>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <a (click)="VerifybyCode()" class="btn btn-default rounded btn-block">Verify</a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                    <div class="col">
+                        <label (click)="ResendVerificationCode()" style="background: transparent !important" class="btn btn-default rounded btn-block">Resend Verification Code</label>
+                    </div>
+                </div>
+        </main>
+    </ion-content>

@@ -1,0 +1,118 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+ 
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0">
+          <!-- <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+          <button class="btn btn-40 btn-link back-btn" (click)="nav.goto_back()" type="button">
+            <span class="material-icons">keyboard_arrow_left</span>
+          </button>
+          <h6 class="navbar-dash" >Inflauncer List</h6>
+
+        </div>
+
+        <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div>
+      </div>
+    </header>
+      <div class="main-container">
+        <div class="text-center">
+            <h4> Top Ranked (<span class="text-warning" ><ion-icon style="margin-top: 3px;" name="star"></ion-icon></span>) Influencer </h4>
+        </div>
+        <div class="container">
+          
+            <div class="swiper-container categories2tab1 text-center mb-4">
+                <div class="swiper-wrapper">
+                    <span class="filters">Filter:</span>
+                    <div class="swiper-slide">
+                        <button (click)="Filter_Inflauncer('rating')" [ngClass]="a.rating?'btn-default active':'btn-outline-default'" id="RatingID" class="btn btn-sm  rounded">Rating</button>
+                    </div>
+                    <div class="swiper-slide pl-1">
+                        <button (click)="Filter_Inflauncer('followers')" [ngClass]="a.follower?'btn-default active':'btn-outline-default'" class="btn btn-sm rounded">Followers</button>
+                    </div>
+                    <div class="swiper-slide pl-1">
+                        <button (click)="Filter_Inflauncer('order')" [ngClass]="a.order?'btn-default active':'btn-outline-default'" class="btn btn-sm  rounded">Orders</button>
+                    </div>
+       
+                </div>
+          
+                <div class="swiper-pagination white-pagination text-left mb-3"></div>
+            </div>
+         
+            <ng-container >
+            <div class="col-md-4" *ngFor="let item of Users" >
+           
+                <div class="card card-widget widget-user" style="margin-bottom: 10px;border: rgb(218, 211, 211) solid 1px;">
+                  
+                  <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">{{item.FirstName}}</h3>
+                    <h6 class="widget-user-desc"><span ><ion-icon name="logo-instagram"></ion-icon></span>{{item.SocialUserName}}</h6>
+                  </div>
+                  <div class="widget-user-image">
+                    <img class="img-circle elevation-2" [src]="item.ProfilePic" onerror="this.src='assets/Content/img/user3.png'"  alt="User Avatar">
+                    <span *ngIf="item.isVerified==1"><ion-icon style="color: green;font-weight: 800;font-size: 20px;" name="checkmark-circle-outline"></ion-icon></span>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-4 border-right">
+                        <div class="description-block">
+                          <h6 class="description-header">{{item.Rating}}</h6>
+                          <span class="description-text">Stars</span>
+                        </div>
+                   
+                      </div>
+                    
+                      <div class="col-4 border-right">
+                        <div class="description-block">
+                          <h6 class="description-header">{{item.OrderCount}}</h6>
+                          <span class="description-text">Orders</span>
+                        </div>
+                    
+                      </div>
+                     
+                      <div class="col-4">
+                        <div class="description-block">
+                          <h6 class="description-header">{{item.followercount}}</h6>
+                          <p class="description-text">Followers</p>
+                        </div>
+                       
+                      </div>
+                      <div class="row text-center">
+                        <div class="col-6">
+                            <button class="btn btn-sm btn-default " style="width: 100%;" (click)="nav.goto_userdetail(item.$key)">View profile</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-sm btn-default " style="width: 100%;    display: flex;
+                            justify-content: center;
+                            align-items: flex-end;" (click)="goto_Instagram(item.SocialUserName)"><span><ion-icon name="logo-instagram"></ion-icon></span> Instagram</button>
+                        </div>
+                    </div>
+
+                    
+                    </div>
+                   
+         
+                  </div>
+                </div>
+
+              
+              </div>
+            </ng-container>
+
+             
+            <div class="row text-center">
+                <div class="col-6 col-md-4 col-lg-3 mx-auto">
+                    <button class="btn btn-sm btn-outline-secondary rounded">Load More...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+  </main>
+</ion-content>

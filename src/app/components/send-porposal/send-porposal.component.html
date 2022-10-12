@@ -1,0 +1,147 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <div class="main-container">
+
+      <div class="container">
+        <div class="card mb-4">
+          <div class="card-header">
+            <!-- <ion-icon name="clear" ></ion-icon> -->
+            <span class="material-icons text-danger" (click)="Dismiss()" style="float: right !important;" slot="end">
+              clear
+              </span>
+            <h6 class="mb-0" *ngIf="ProposalData">Send Porposal to <b> {{ProposalData.Post_Created_By.FirstName}} {{ProposalData.Post_Created_By.LastName}}</b></h6>
+          </div>
+          <div class="card-body">
+
+            <form [formGroup]="porposalForm" (ngSubmit)="formSubmit(porposalForm.value)">
+              <div class="form-group">
+                <label for="exampleFormControlInput2">Description</label>
+                <textarea type="email" formControlName="Description" rows="4" class="form-control "
+                  id="exampleFormControlInput2" placeholder="Description" [class.valid]="porposalForm.get('Description').valid && 
+      (porposalForm.get('Description').dirty || porposalForm.get('Description').touched)" [class.invalid]="porposalForm.get('Description').invalid && 
+      (porposalForm.get('Description').dirty || porposalForm.get('Description').touched)"></textarea>
+
+                <!-- Error messages -->
+                <div class="alert alert-danger"
+                  *ngIf="porposalForm.get('Description').invalid && porposalForm.get('Description').errors && (porposalForm.get('Description').dirty || porposalForm.get('Description').touched)"
+                  style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+
+                  <small class="text-danger" *ngIf="porposalForm.get('Description').hasError('required')">
+                    This field is required.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('Description').hasError('minlength')">
+                    The minimum length for this field is
+                    {{porposalForm.get('Description').errors.minlength.requiredLength}} characters.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('Description').hasError('maxlength')">
+                    The maximum length for this field is
+                    {{porposalForm.get('Description').errors.maxlength.requiredLength}} characters.
+                  </small>
+                </div>
+                <div class="alert alert-success"
+                  *ngIf="porposalForm.get('Description').valid && (porposalForm.get('Description').dirty || porposalForm.get('Description').touched)"
+                  style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                  <div class="text-success" *ngIf="porposalForm.get('Description').valid">
+                    <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                    <small>Success</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Price</label>
+                <input type="text" formControlName="Price" class="form-control" type="number"
+                  id="exampleFormControlInput1" placeholder="Rs ..." [class.valid]="porposalForm.get('Price').valid && 
+                                  (porposalForm.get('Price').dirty || porposalForm.get('Price').touched)"
+                  [class.invalid]="porposalForm.get('Price').invalid && 
+                                  (porposalForm.get('Price').dirty || porposalForm.get('Price').touched)" />
+
+                <!-- Error messages -->
+                <div class="alert alert-danger"
+                  *ngIf="porposalForm.get('Price').invalid && porposalForm.get('Price').errors && (porposalForm.get('Price').dirty || porposalForm.get('Price').touched)"
+                  style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+
+                  <small class="text-danger" *ngIf="porposalForm.get('Price').hasError('required')">
+                    Price is required.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('Price').hasError('minlength')">
+                    The minimum length for this field is
+                    {{porposalForm.get('Price').errors.minlength.requiredLength}} characters.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('Price').hasError('maxlength')">
+                    The maximum length for this field is
+                    {{porposalForm.get('Price').errors.maxlength.requiredLength}} characters.
+                  </small>
+                </div>
+                <div class="alert alert-success"
+                  *ngIf="porposalForm.get('Price').valid && (porposalForm.get('Price').dirty || porposalForm.get('Price').touched)"
+                  style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                  <div class="text-success" *ngIf="porposalForm.get('Price').valid">
+                    <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                    <small>Success</small>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Delever In</label>
+                <ion-select formControlName="DeleverInDays" class="form-control " name="purchasecustomer"
+                  required="true" placeholder="Select Days" [class.valid]="porposalForm.get('DeleverInDays').valid && 
+                             (porposalForm.get('DeleverInDays').dirty || porposalForm.get('DeleverInDays').touched)"
+                  [class.invalid]="porposalForm.get('DeleverInDays').invalid && 
+                             (porposalForm.get('DeleverInDays').dirty || porposalForm.get('DeleverInDays').touched)">
+                  <ion-select-option *ngFor="let items of helper.Day" [value]="item">{{items}} <span
+                      *ngIf="items<=1">Day</span> <span *ngIf="items>=2">Days</span>
+
+                  </ion-select-option>
+                </ion-select>
+
+
+                <!-- Error messages -->
+                <div class="alert alert-danger"
+                  *ngIf="porposalForm.get('DeleverInDays').invalid && porposalForm.get('DeleverInDays').errors && (porposalForm.get('DeleverInDays').dirty || porposalForm.get('DeleverInDays').touched)"
+                  style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+
+                  <small class="text-danger" *ngIf="porposalForm.get('DeleverInDays').hasError('required')">
+                    This field is required.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('DeleverInDays').hasError('minlength')">
+                    The minimum length for this field is
+                    {{porposalForm.get('DeleverInDays').errors.minlength.requiredLength}} characters.
+                  </small>
+                  <small class="text-danger" *ngIf="porposalForm.get('DeleverInDays').hasError('maxlength')">
+                    The maximum length for this field is
+                    {{porposalForm.get('DeleverInDays').errors.maxlength.requiredLength}} characters.
+                  </small>
+                </div>
+                <div class="alert alert-success"
+                  *ngIf="porposalForm.get('DeleverInDays').valid && (porposalForm.get('DeleverInDays').dirty || porposalForm.get('DeleverInDays').touched)"
+                  style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                  <div class="text-success" *ngIf="porposalForm.get('DeleverInDays').valid">
+                    <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                    <small>Success</small>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="form-group ">
+                <button class="form-control" type="submit" [disabled]="porposalForm.invalid"
+                  class="btn btn-default rounded btn-block">Send</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</ion-content>

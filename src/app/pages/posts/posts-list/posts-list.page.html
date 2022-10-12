@@ -1,0 +1,178 @@
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+        <header class="header">
+            <div class="row">
+                <div class="col-auto px-0">
+                    
+                        <a (click)="nav.goto_back()" class=" btn btn-40 btn-link">
+                            <span class="material-icons">arrow_back</span>
+                        </a>
+                   
+                    <h6 class="navbar-dash">Post List</h6>
+
+                </div>
+
+                <div class="ml-auto col-auto pl-0">
+
+                    <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">notifications_none</span>
+              <span class="counter"></span>
+                        <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                       
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <div class="container mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group float-label position-relative mb-1">
+                            <input type="text" class="form-control " [(ngModel)]="SearchPost" style="font-size: 12px;">
+                            <label class="form-control-label" style="font-size: 15px;">Search post</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+
+                <div class="swiper-container categories2tab1 text-center mb-4">
+                    <div class="swiper-wrapper">
+                        <span class="filters">Filter:</span>
+                        <div class="swiper-slide ">
+                            <button (click)="Filter_Post('title')" id="title" [ngClass]="a.title?'btn-default active':'btn-outline-default'" class="btn btn-sm    rounded">Latest</button>
+                        </div>
+                        <div class="swiper-slide pl-1 ">
+                            <button (click)="Filter_Post('price')" id="price"  [ngClass]="a.price?'btn-default active':'btn-outline-default'" class="btn btn-sm  rounded">Price</button>
+                        </div>
+                        <div class="swiper-slide pl-1">
+                            <button (click)="Filter_Post('like')" id="like" [ngClass]="a.like?'btn-default active':'btn-outline-default'"  class="btn btn-sm  rounded">Likes</button>
+                        </div>
+                        <div class="swiper-slide pl-1">
+                            <button (click)="Filter_Post('view')" [ngClass]="a.view?'btn-default active':'btn-outline-default'" class="btn btn-sm  rounded">Views</button>
+                        </div>
+           
+                    </div>
+              
+                    <div class="swiper-pagination white-pagination text-left mb-3"></div>
+                </div>
+
+                <!-- <div class="card m-2" *ngFor="let p of Posts">
+                    <div class="card-header bg-none">
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-secondary small">{{p.CreatedDateTime}}</p>
+                            </div>
+                            <div class="col-auto">
+                                <small class="small text-secondary">Views: {{p.ViewCount}} </small>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body position-relative">
+                        <div class="media">
+                            <div class="icon icon-60 mr-3 rounded">
+
+                                <img [src]="p.Images" onerror="this.src='assets/Content/img/defaultprofile.jpg'"
+                                    alt="Generic placeholder image" style="display: block;">
+
+                            </div>
+                            <div class="media-body">
+                                <h6 class="mb-1 text-default">{{p.Title}}</h6>
+                                <p class="small text-secondary mb-1">{{p.Description}}</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-1">Rs: {{p.Price}}</h6>
+                            </div>
+                            <div class="col-auto">
+                                <button (click)="nav.goto_postdetail(p.$key)" class="btn btn-default rounded">View
+                                    Detail</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <ng-container *ngFor="let p of Posts">
+                    <ion-card class="card" style="width: 100%" (click)="nav.goto_postdetail(p.$key)" >
+                        <ion-card-header>
+                                <ion-card-subtitle>
+                                    <span class="avatar avatar-40 rounded-circle" style="float: right">
+                                        <img [src]="p.Images" onerror="this.src='assets/Content/img/defaultprofile.jpg'">
+                                    </span>
+                                    <small>Posted by: <a href="javascript:void()" style="color: #8490d1">Akram Shah</a>
+                                    </small><br>
+                                    <small> On: {{p.CreatedDateTime}}</small>
+                                </ion-card-subtitle>
+                                <ion-card-title>
+                                   {{p.Title}}
+                                </ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+                               {{p.Description}}<br>
+                               <small slot="end">Tags: {{p.Tags}}</small><br>
+                               <span  style="float: right">
+                               <small>Views: ({{p.ViewCount}})</small> 
+                                   </span>
+                            </ion-card-content>
+    
+                         </ion-card>
+                  </ng-container> -->
+
+                  
+                  <div class="row mb-2" *ngFor="let p of Posts | filter:SearchPost" >
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                      <div class="card">
+                        <!-- <img class="card-img" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" alt="Bologna"> -->
+                        <!-- <div class="card-img-overlay">
+                          <a href="#" class="btn btn-light btn-sm">Cooking</a>
+                        </div> -->
+                        <div class="card-body">
+                          <h4 class="card-title">{{p.Title}}</h4>
+                          <small class="text-muted cat"  style="
+                          align-items: center;">
+                            <!-- <span class="material-icons" style="font-size: 14px;margin-bottom: 2px">schedule</span> -->{{p.CreatedDateTime}}
+                            <i class="fas fa-users text-info"></i> Post by {{p.UserName}}
+                          </small>
+                          <p class="card-text">{{p.Description}}</p>
+                          
+                          <div class="row">
+                              <div class="col-6" style="display: flex;
+                             
+                              align-items: center;">
+                                  <span class="material-icons text-success" >local_offer</span><span style="font-weight: bold;font-size: 18px;">Rs {{p.Price}}</span>  
+                              </div>
+                              <div class="col-6" (click)="nav.goto_postdetail(p.$key)">
+                                  <a class="btn btn-info " style="float: right;">View Post</a>
+
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                          <div  class="views" style="display: flex;
+                          justify-content: center;
+                          align-items: center;" (click)="LikePost(p.$key)"><span id="heart" class="material-icons text-danger">
+                              {{isPostLiked(p.$key)}}</span>{{p.TotalLike}}
+                              
+                          </div>
+                          <div class="stats" style="display: flex;
+                          justify-content: center;
+                          align-items: center;">
+                             
+                             <span class="material-icons" >visibility</span>{{p.ViewCount}}
+                            
+                          </div>
+                           
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </main>
+</ion-content>

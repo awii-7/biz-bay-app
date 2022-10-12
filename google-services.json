@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "784694674805",
+    "firebase_url": "https://bizbay-70d0a-default-rtdb.firebaseio.com",
+    "project_id": "bizbay-70d0a",
+    "storage_bucket": "bizbay-70d0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784694674805:android:e40dae9f98898ae6d2bf3c",
+        "android_client_info": {
+          "package_name": "com.zarbtech.bizbay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784694674805-6t37etmhu7psf9t326sook2l69jltq52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmIxHr23mvTly4GbrY5b8Qv8BIBCNTB4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784694674805-6t37etmhu7psf9t326sook2l69jltq52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

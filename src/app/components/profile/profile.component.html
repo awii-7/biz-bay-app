@@ -1,0 +1,126 @@
+<ion-row>
+    <ion-col size="2">
+        <ion-menu-button color="primary"></ion-menu-button>
+    </ion-col>
+    <ion-col size="10"></ion-col>
+  </ion-row>
+<div class="center-align">
+  <br>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col>
+      <ion-avatar class="avatar-Size">
+        <img src="/assets/images/profileImg.png">
+      </ion-avatar>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <h2><b>{{agentProfile.fullName}}</b></h2>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <h2><b>Agent ID: {{agentProfile.agentid}}</b></h2>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-card>
+    <ion-card-content>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Phone No.
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-input class="ion-no-padding" type="Number" maxlength="11" [(ngModel)]="agentProfile.phoneNo" placeholder="Add Phone Number"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Phone No. 2
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-input class="ion-no-padding" type="Number" name="altPhone" maxlength="11" [(ngModel)]="agentProfile.altPhone"  placeholder="Add Alternate Number"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Whatsapp
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-input class="ion-no-padding" type="Number" maxlength="11" [(ngModel)]="agentProfile.whatsapp" placeholder="Add Whatsapp Number"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Estate/Company
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-input class="ion-no-padding" type="text" [(ngModel)]="agentProfile.estate" placeholder="Add Estate/Company Name"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Email
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-input class="ion-no-padding" type="text" [(ngModel)]="agentProfile.email" placeholder="Add Email"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="list-row">
+        <ion-col class="list-Heading-Col" size="4">
+          Address
+        </ion-col>
+        <ion-col class="list-Value-Col" size="8">
+          <ion-textarea class="ion-no-padding" type="text" [(ngModel)]="agentProfile.address" placeholder="Add Address"></ion-textarea>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-card-content>
+        <ion-row class="list-row">
+          <ion-col class="list-Heading-Col" size="4">
+            Password
+          </ion-col>
+          <ion-col class="list-Value-Col" size="8">
+            <ion-input class="ion-no-padding" [(ngModel)]="agentPwd.newPwd" placeholder="New Password"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="list-row">
+          <ion-col class="list-Heading-Col" size="4">
+            Confirm Pwd
+          </ion-col>
+          <ion-col class="list-Value-Col" size="8">
+            <ion-input class="ion-no-padding" [(ngModel)]="agentPwd.confirmPwd" placeholder="Confirm Password"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col class="center-align">
+          <ion-button clear color="primary" item-center (click)="saveProfile()">
+            <ion-icon name="save"> </ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col class="center-align">
+          <ion-button clear color="medium" item-center>
+            <ion-icon name="share"> </ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</div>

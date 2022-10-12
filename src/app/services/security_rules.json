@@ -1,0 +1,19 @@
+{
+    "Authentication": {
+        "isAdminAllowed": {
+            "AllowAccess": true,
+            "TokenCode": "#@%#$^DFFSDTE$%^$T#$R#CSCSDFWTR$T#T#$T#R@#E#@R!E#R#R#$T#FDFDETE$T$^T$%Y%^&^%U^&%$#",
+            "Owner": {
+                "zarbtech": {
+                    "isRegistered": true
+                },
+                "OwnerName": {
+                    "Name": "Shahzaib"
+                },
+                "Permit": {
+                    "IsOwnerPermit": true
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+
+
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+   
+        <header class="header">
+            <div class="row">
+                <div class="col-auto px-0">
+                    <a (click)="helper.ShowMenu()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">menu</span>                     
+                    </a>
+                </div>
+                
+                <h6 class="navbar-dash" style="margin-top: 10px !important;">Wallet</h6>
+                <div class="ml-auto col-auto pl-0">
+
+                    <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">notifications_none</span>
+              <span class="counter"></span>
+                        <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                       
+                    </a>
+                </div>
+            </div>
+            
+        </header>
+
+        <div class="container mt-3 mb-4 text-center">
+            <h2 class="text-white">Rs {{MyWallet}}</h2>
+            <p class="text-white mb-4">Total Balance</p>
+        </div>
+     
+    </main>
+</ion-content>
+

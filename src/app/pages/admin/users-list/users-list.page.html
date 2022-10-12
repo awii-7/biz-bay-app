@@ -1,0 +1,129 @@
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+   
+        <header class="header">
+            <div class="row">
+                <div class="col-auto px-0">
+                    <a (click)="this.helper.ShowMenu()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">menu</span>                     
+                    </a>
+                </div>
+                
+                <h6 class="navbar-dash" style="margin-top: 10px !important;">Users</h6>
+                <!-- <div class="ml-auto col-auto pl-0">
+  
+                    <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">notifications_none</span>
+              <span class="counter"></span>
+                        <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                       
+                    </a>
+                </div> -->
+            </div>
+            
+        </header>
+        <div class="main-container">
+          <div class="container">
+              <div class="card mb-4">
+                <div class="card-header border-0 bg-none">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h6 class="mb-0">Active Users</h6>
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="card-body p-0" >
+                  <table class="table mb-0">
+                      <thead>
+                          <tr>
+                              <th class="all font-weight-medium">Name</th>
+                        
+                              <th class="min-tablet font-weight-medium">Date</th>
+                              <th class=" font-weight-medium">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let item of UsersList">
+                          <tr *ngIf="item.IsActive==='1'">
+                              <td><small>{{(item.Name.length>9)? (item.Name | slice:0:9)+'..':(item.Name)}}</small></td>
+                          
+                              <td>
+                                  <div class="media">
+    
+                                      <div class="media-body">
+                                          <p class="mb-0 small">{{this.helper.RelativeTime(item.CreatedOn)}}</p>
+                                           <p class="text-success small" *ngIf="item.UserType==1">Businessman Account</p>
+                                          <p class="text-warning small" *ngIf="item.UserType==2">Influencer Account</p> 
+                                        </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <div class="btn-primary btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item)">
+                                    <span class="material-icons text-white">edit</span>
+                                  </div>
+                                  <!-- <div class="btn-success btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item.DeleverToInfluencer)" *ngIf="item.DeleverToInfluencer==true">C</div> -->
+                                </td>
+                          </tr>
+                         
+                      </tbody>
+                  </table>
+              </div>
+
+              
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header border-0 bg-none">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h6 class="mb-0">Blocked Users</h6>
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="card-body p-0" >
+                  <table class="table mb-0">
+                      <thead>
+                          <tr>
+                              <th class="all font-weight-medium">Name</th>
+                        
+                              <th class="min-tablet font-weight-medium">Date</th>
+                              <th class=" font-weight-medium">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let item of UsersList">
+                          <tr *ngIf="item.IsActive==='0'">
+                              <td><small>{{(item.Name.length>9)? (item.Name | slice:0:9)+'..':(item.Name)}}</small></td>
+                          
+                              <td>
+                                  <div class="media">
+    
+                                      <div class="media-body">
+                                          <p class="mb-0 small">{{this.helper.RelativeTime(item.CreatedOn)}}</p>
+                                           <p class="text-success small" *ngIf="item.UserType==1">Businessman Account</p>
+                                          <p class="text-warning small" *ngIf="item.UserType==2">Influencer Account</p> 
+                                          <p class="text-danger small">Blocked:{{this.helper.RelativeTime(item.ModifiedOn)}}</p> 
+                                        </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <div class="btn-primary btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item,1)">
+                                    <span class="material-icons text-white">edit</span>
+                                  </div>
+                                  <!-- <div class="btn-success btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item.DeleverToInfluencer)" *ngIf="item.DeleverToInfluencer==true">C</div> -->
+                                </td>
+                          </tr>
+                         
+                      </tbody>
+                  </table>
+              </div>
+
+              
+            </div>
+ 
+  
+          </div>
+      </div>
+    </main>
+  </ion-content>
+  

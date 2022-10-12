@@ -1,0 +1,132 @@
+
+  <!-- * loader -->
+
+  <!-- App Header -->
+  <div class="appHeader text-light"  style="background: rgba(54, 41, 183, 0.95);" *ngIf="Chat">
+      <div class="left" >
+          <a style="color: white;" (click)="nav.goto_back()" class="headerButton">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+          </a>
+      </div>
+      <div class="pageTitle " style="margin-left: 10px !important;" *ngIf="this.helper.userData.UserType==2">{{Chat.BizmanName}}</div>
+      <div class="pageTitle " style="margin-left: 10px !important;" *ngIf="this.helper.userData.UserType==1">{{Chat.InfluencerName}}</div>
+        <ion-icon name="add" slot="end"></ion-icon>
+    </div>
+ 
+<ion-content>
+
+
+
+
+
+    <!-- App Capsule -->
+    <div id="appCapsule" class="mb-2 mt-1" *ngIf="this.Chat" >
+        <ng-container *ngFor="let chat of this.Chat.chat">
+        <div class="message-item" *ngIf="chat.userid !=this.helper.userData.$key">
+            <div class="content">
+                <div class="title">{{chat.fromName}}</div>
+                <div class="bubble">
+                    {{chat.message}}
+                </div>
+                <div class="subtitle"><small>{{this.helper.RelativeTime(chat.datetime)}}</small> </div>
+            </div>
+        </div>
+        <div class="message-item user" *ngIf="chat.userid==this.helper.userData.$key">
+            <div class="content">
+                <div class="title" *ngIf="Chat.BizmanID==this.helper.userData.$key">Me</div>
+                <div class="title" *ngIf="Chat.InfluencerID==this.helper.userData.$key">Me</div>
+                <!-- <div class="title">{{chat.fromName}}</div> -->
+                <div class="bubble">
+                    {{chat.message}}
+                </div>
+                <!-- <small>{{this.helper.RelativeTime(chat.datetime)}}</small> -->
+                <div class="subtitle"><small>{{this.helper.RelativeTime(chat.datetime)}}</small> </div>
+
+                <!-- <div class="subtitle">{{this.helper.RelativeTime(chat.datetime)}}</div> -->
+            </div>
+        </div>
+    </ng-container>
+
+
+    </div>
+
+    <div class="modal fade action-sheet inset" id="addActionSheet" data-backdrop="" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Choose</h5>
+                </div>
+                <div class="modal-body">
+                    <ul class="action-button-list">
+                        <li>
+                            <a href="#" class="btn btn-list" data-dismiss="modal">
+                                <span>
+                                    <ion-icon name="camera-outline"></ion-icon>
+                                    Take a photo
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-list" data-dismiss="modal">
+                                <span>
+                                    <ion-icon name="videocam-outline"></ion-icon>
+                                    Video
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-list" data-dismiss="modal">
+                                <span>
+                                    <ion-icon name="image-outline"></ion-icon>
+                                    Upload from Gallery
+                                </span>
+                            </a>
+                        </li>
+                        <li *ngIf="this.helper.userData.UserType=='1'">
+                            <a href="#" class="btn btn-list" data-dismiss="modal">
+                                <span>
+                                    <ion-icon name="pricetag-outline"></ion-icon>
+                                    Make Order
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-list bg-danger " data-dismiss="modal">
+                                <span class="text-center">
+                                    <!-- <ion-icon name="musical-notes-outline"></ion-icon> -->
+                                    Cancel
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Share Action Sheet -->
+
+    <!-- chat footer -->
+
+    <!-- * chat footer -->
+  </ion-content>
+  <ion-footer>
+    <div class="chatFooter">
+      <form (ngSubmit)="sendMessage(message)">
+          <a href="javascript:;"  class="btn btn-icon btn-secondary rounded" data-toggle="modal" data-target="#addActionSheet">
+              <ion-icon name="add"></ion-icon>
+          </a>
+          <div class="form-group boxed">
+              <div class="input-wrapper">
+                  <input type="text" class="form-control" [(ngModel)]="message" name="msg" placeholder="Type a message...">
+                  <i class="clear-input">
+                      <ion-icon name="close-circle"></ion-icon>
+                  </i>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-icon btn-primary rounded">
+              <ion-icon name="send"></ion-icon>
+          </button>
+      </form>
+  </div>
+  </ion-footer>
+

@@ -1,0 +1,29 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="default-page-bg">
+<app-prop-box [PropertyID]="50" (selectedProperty)="ShowPropertyDetail($event)"></app-prop-box>
+</ion-content> -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="invListTab">
+      <ion-icon name="menu"></ion-icon>
+      <ion-label>Inventory</ion-label>
+    </ion-tab-button>
+    <!-- <ion-tab-button tab="leadListTab">
+        <ion-icon name="people"></ion-icon>
+      <ion-label>Leads</ion-label>
+    </ion-tab-button> -->
+    <ion-tab-button tab="offerListTab">
+        <ion-icon name="cash"></ion-icon>
+        <ion-label>Offers</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="profiletTab">
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

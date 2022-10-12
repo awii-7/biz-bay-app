@@ -1,0 +1,163 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+ 
+      <header class="header">
+          <div class="row">
+              <div class="col-auto px-0">
+                  <a (click)="this.helper.ShowMenu()" class=" btn btn-40 btn-link">
+                      <span class="material-icons">menu</span>                     
+                  </a>
+              </div>
+              
+              <h6 class="navbar-dash" style="margin-top: 10px !important;">Posts</h6>
+              <!-- <div class="ml-auto col-auto pl-0">
+
+                  <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                      <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+                      <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                     
+                  </a>
+              </div> -->
+          </div>
+          
+      </header>
+      <div class="main-container">
+        <div class="container">
+            <div class="card mb-4">
+                <div class="card-header border-0 bg-none">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h6 class="mb-0">Pending Posts</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-0" >
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th class="all font-weight-medium">Title</th>
+                                <th class="min-tablet font-weight-medium">Date</th>
+                                <th class=" font-weight-medium">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of PostList">
+                            <tr *ngIf="item.Status=='P'">
+                                <td>{{(item.Title.length>12)? (item.Title | slice:0:12)+'...':(item.Title)}}</td>
+                                <td>
+                                    <div class="media">
+      
+                                        <div class="media-body">
+                                            <p class="mb-0">{{this.helper.RelativeTime(item.CreatedDateTime)}}</p>
+                                            <!-- <p class="text-success small" *ngIf="item.isSubmited==true && item.isReviewed==true">Order Completed</p>
+                                            <p class="text-danger small" *ngIf="item.isSubmited==false && item.isReviewed==false">Order Incomplete</p>
+                                            <p class="text-warning small" *ngIf="item.isSubmited==true && item.isReviewed==false">Waiting for Review</p> -->
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-primary btn btn-sm btn-40 rounded" (click)="presentActionSheet(item.key,item)">
+                                      <span class="material-icons text-white">edit</span>
+                                    </div>
+                                    <!-- <div class="btn-success btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item.DeleverToInfluencer)" *ngIf="item.DeleverToInfluencer==true">C</div> -->
+                                  </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header border-0 bg-none">
+                  <div class="row">
+                      <div class="col align-self-center">
+                          <h6 class="mb-0">Accepted Posts</h6>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="card-body p-0" >
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="all font-weight-medium">Title</th>
+                            <th class="min-tablet font-weight-medium">Date</th>
+                            <th class=" font-weight-medium">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of PostList">
+                        <tr *ngIf="item.Status=='C'">
+                            <td>{{(item.Title.length>12)? (item.Title | slice:0:12)+'...':(item.Title)}}</td>
+                            <td>
+                                <div class="media">
+  
+                                    <div class="media-body">
+                                        <p class="mb-0">{{this.helper.RelativeTime(item.CreatedDateTime)}}</p>
+                                        <!-- <p class="text-success small" *ngIf="item.isSubmited==true && item.isReviewed==true">Order Completed</p>
+                                        <p class="text-danger small" *ngIf="item.isSubmited==false && item.isReviewed==false">Order Incomplete</p>
+                                        <p class="text-warning small" *ngIf="item.isSubmited==true && item.isReviewed==false">Waiting for Review</p> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-primary btn btn-sm btn-40 rounded" (click)="presentActionSheet(item.key,item)">
+                                  <span class="material-icons text-white">edit</span>
+                                </div>
+                                <!-- <div class="btn-success btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item.DeleverToInfluencer)" *ngIf="item.DeleverToInfluencer==true">C</div> -->
+                              </td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <h6 class="mb-0">Rejected Posts</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0" >
+              <table class="table mb-0">
+                  <thead>
+                      <tr>
+                          <th class="all font-weight-medium">Title</th>
+                          <th class="min-tablet font-weight-medium">Date</th>
+                          <th class=" font-weight-medium">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let item of PostList">
+                      <tr *ngIf="item.Status=='R'">
+                          <td>{{(item.Title.length>12)? (item.Title | slice:0:12)+'...':(item.Title)}}</td>
+                          <td>
+                              <div class="media">
+
+                                  <div class="media-body">
+                                      <p class="mb-0">{{this.helper.RelativeTime(item.CreatedDateTime)}}</p>
+                                      <!-- <p class="text-success small" *ngIf="item.isSubmited==true && item.isReviewed==true">Order Completed</p>
+                                      <p class="text-danger small" *ngIf="item.isSubmited==false && item.isReviewed==false">Order Incomplete</p>
+                                      <p class="text-warning small" *ngIf="item.isSubmited==true && item.isReviewed==false">Waiting for Review</p> -->
+                                  </div>
+                              </div>
+                          </td>
+                          <td>
+                              <div class="btn-primary btn btn-sm btn-40 rounded" (click)="presentActionSheet(item.key,item)">
+                                <span class="material-icons text-white">edit</span>
+                              </div>
+                              <!-- <div class="btn-success btn btn-sm btn-30 rounded" (click)="presentActionSheet(item.key,item.DeleverToInfluencer)" *ngIf="item.DeleverToInfluencer==true">C</div> -->
+                            </td>
+                      </tr>
+                     
+                  </tbody>
+              </table>
+          </div>
+        </div>
+
+        </div>
+    </div>
+  </main>
+</ion-content>

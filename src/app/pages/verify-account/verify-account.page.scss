@@ -1,0 +1,137 @@
+@media screen {
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        font-style: italic;
+        font-weight: 700;
+        src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+    }
+}
+
+/* CLIENT-SPECIFIC STYLES */
+body,
+table,
+td,
+a {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+table,
+td {
+    --mso-table-lspace: 0pt;
+    --mso-table-rspace: 0pt;
+}
+
+img {
+    -ms-interpolation-mode: bicubic;
+}
+
+/* RESET STYLES */
+img {
+    border: 0;
+    height: auto;
+    line-height: 100%;
+    outline: none;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse !important;
+}
+
+body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+/* MOBILE STYLES */
+@media screen and (max-width:600px) {
+    h1 {
+        font-size: 32px !important;
+        line-height: 32px !important;
+    }
+}
+
+/* ANDROID CENTER FIX */
+div[style*="margin: 16px 0;"] {
+    margin: 0 !important;
+}
+.input-field {
+    max-width: 380px;
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+    border-radius: 55px;
+    display: grid;
+    position: relative;
+    border-color: silver ;
+  }
+  .confirmBtn{
+    font-size: 20px;
+background-color: #3490f0;
+     color: #ffffff;
+         padding: 15px 25px;
+          border-radius: 2px;
+           border: 1px solid #3490f0;
+            display: inline-block;
+  }
+  .verifyTextbox{
+    margin: 0;
+    padding-bottom: 5px;
+    font: inherit;
+    color: inherit;
+    background-color: #f3f1f1;
+    border: none;
+    border-radius: 55px;
+    height: 55px;
+    text-align: center;
+    width: 100%;
+  }
+  verifyTextbox:focus{
+      border-block-color: whitesmoke 1px !important;
+  }
+
+  .verifyButton{
+    
+    background-color: #3490f0;
+    color: #ffffff;
+    padding: 15px 25px;
+    border: 1px solid #3490f0;
+    display: inline-block;
+    width: 100%;
+    border-radius: 55px;
+    margin-left: 5px;
+  }

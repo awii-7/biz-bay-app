@@ -1,0 +1,117 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0">
+          <!-- <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+          <button class="btn btn-40 btn-link back-btn" (click)="nav.goto_back()" type="button">
+            <span class="material-icons">keyboard_arrow_left</span>
+          </button>
+          <h6 class="navbar-dash">Post Detail</h6>
+
+        </div>
+
+        <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <div class="container">
+
+        <div class="container">
+          <p class="text-mute mb-1">Posted by : <span class="text text-primary">{{Postedby}} </span></p>
+          <h5>Title: {{PostDetail.Title}}</h5>
+          <h5 class="text-success">Rs: {{PostDetail.Price}}</h5>
+          <hr>
+
+          <hr>
+          <p class="text-mute">Description:<br> {{PostDetail.Description}}</p>
+          <br>
+          <!-- <h6 class="page-title">{{PostDetail.Tags}}</h6> -->
+          <ion-label>Tags : </ion-label>
+          <ng-container *ngFor="let item of PostDetail.Tags">
+            
+            <ion-chip style="font-size: x-small;">{{item}}</ion-chip>
+          </ng-container>
+
+          <div class="row">
+            <div class="col-auto " *ngIf="this.helper.userData.UserType=='2'">
+              <button (click)="OpenPorposalModal(PostDetail.UserID)" class="btn btn-default btn-sm rounded" 
+              style="float: right; margin: 3px 3px 3px 3px ;">SendPerposal</button>
+              
+            </div>
+            <span *ngIf="TotalProposal"><small>(total sent proposal : {{TotalProposal}})</small></span>
+          </div>
+
+          <!-- <ion-item-divider class="p-0 m-0">
+            <small style="text-align: center;">Comments</small>
+          </ion-item-divider>
+          <div *ngFor="let c of CommentList">
+            <div class="card my-1">
+              <div class="card-header">
+                <small>By <span class="text-primary">{{c.CommentedByName}}</span> </small>
+              </div>
+              <div class="card-body pb-2">
+                <div class="media-body">
+                  <p class="mb-1">{{c.Comment}}</p>
+                </div>
+                <ion-row>
+                  <ion-col class="col-8 pl-0 pr-0">
+                    <p class="text-mute small">{{c.CommentDate}} at {{c.CommentTime}} </p>
+                  </ion-col>
+                  <ion-col class="col-4 pl-0 pr-0" style="text-align: end;">
+
+                    <a (click)="ReplyBtn()"  class="text-right">
+                      <span class="text-primary small">Reply</span>
+                    </a>
+                  </ion-col>
+                </ion-row>
+              </div> -->
+              <!-- Reply every comment will show here -->
+              <!-- <div class="card shadow-lg" style="margin-left: 20px !important;">
+              <div class="card-body pb-2">
+                <div class="media-body">
+                  <small class="mb-1">Replyed by Shahzaib</small>
+                </div>
+                <ion-row>
+                  <ion-col class="col-12 pl-0 pr-0">
+                    <p class="text-mute small">Waht to Do Dear? </p>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div> -->
+            </div>
+          </div>
+
+          <!-- <div class="card my-3">
+            <div class="card shadow-sm" *ngIf="showreplyDiv" style="margin-left: 20px !important;">
+              <div class="card-body mb-0 pb-2">
+                <div class="media-body">
+                  <small class="mb-1 text-primary blood">Replying to Shahzaib</small>
+                  <button (click)="ReplyCancelBtn()" class="btn btn-default btn-sm rounded " style="float: right;">X</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body pb-1 pt-2">
+              <div class="form-group" id="WritecommentDiv">
+               
+                <textarea type="text" class="form-control" rows="2" [(ngModel)]="Postcomment" name="baddress"
+                  [placeholder]="commentplaceholder"></textarea>
+              
+                <button (click)="PostComment()" class="btn btn-default btn-sm rounded btn-block"
+                  style="text-align: center; margin: 3px 3px 3px 3px ;">Add Comment</button>
+
+
+              </div>
+            </div>
+          </div> -->
+
+          
+        </div>
+  </main>
+</ion-content>

@@ -1,0 +1,178 @@
+<ion-content>
+  <!-- Begin page content -->
+   <!-- Loading Component -->
+<!-- <app-loading></app-loading> -->
+  <main class="flex-shrink-0 main has-footer">
+    <!-- Fixed navbar -->
+    <ion-header class="header" no-border>
+        <div class="row">
+            <div class="col-auto px-0">
+                <!-- <ion-menu-button   auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+            </div>
+            <div class="text-left col align-self-center">
+                <h4 class="text-white" >Create new account</h4>
+            </div>
+            <div class="ml-auto col-auto align-self-center" (click)="goto_Login()">          
+                 <button  class="btn btn-default rounded btn-block"> Sign In</button>  
+            </div>
+        </div>
+    </ion-header>
+    <div class="container h-100 text-white">
+        <div class="row h-100">
+            <div class="col-12 align-self-center mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                        <h2 class="font-weight-normal mb-5"></h2> 
+                        <div class="container mt-2 mb-3 text-center">
+                            <div class="avatar avatar-150 rounded-circle position-relative "  (click)="presentActionSheet()" style="text-align: center;padding-bottom: 10px;border: 5px white solid">
+                                    <img  onerror="this.src = 'assets/Content/img/defaultprofile.jpg'" [src]="this.helper.SignupProfilePic" />
+                                    <!--<span class="material-icons" style="font-size: 30px !important;color: gray !important;position: absolute;">add_a_photo</span> -->
+                                 </div>
+                            </div> 
+                        
+                        <div class="form-group float-label active">
+                          <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="SelectedUser" value="bizman">
+                            <ion-segment-button style="color: white !important" value="bizman">
+                              <ion-label>I'm Businessman</ion-label>
+                            </ion-segment-button>
+                            <ion-segment-button style="color: white !important" value="Influencer">
+                              <ion-label>I'm Influencer</ion-label>
+                            </ion-segment-button>
+                          </ion-segment>
+                             <label class="form-control-label text-white">Who are you?</label> 
+                        </div>
+                        <ng-container *ngIf="UType==1">
+                            <div class="form-group float-label active">
+                                <input type="text" [(ngModel)]="Bdata.FirstName" name="bfname" class="form-control text-white" >
+                                <label class="form-control-label text-white">First Name *</label>
+                            </div>
+
+                            <div class="form-group float-label active">
+                                <input type="text" [(ngModel)]="Bdata.LastName" name="blname" class="form-control text-white" >
+                                <label class="form-control-label text-white">Last Name *</label>
+                            </div>
+                            <div class="form-group float-label active">
+                                <input type="text" [(ngModel)]="Bdata.UserName" name="buser" class="form-control text-white" >
+                                <label class="form-control-label text-white">Username *</label>
+                            </div>
+                            <div class="form-group float-label active">
+                                <input type="email" [(ngModel)]="Bdata.Email" name="bmail" class="form-control text-white" >
+                                <label class="form-control-label text-white">Email *</label>
+                            </div>
+                            <div class="form-group float-label active">
+                                    <input type="password" [(ngModel)]="Bdata.Password" name="bpass"  class="form-control text-white" >
+                                    <label class="form-control-label text-white">Password *</label>
+                                    
+                                </div>
+                                
+                                <div class="form-group float-label active">
+                                        <input type="text" [(ngModel)]="Bdata.City" name="bcity"  class="form-control text-white" >
+                                        <label class="form-control-label text-white">City</label>    
+                                    </div>                                
+                                    <div class="form-group float-label active">
+                                            <input type="text" [(ngModel)]="Bdata.Address" name="baddress"  class="form-control text-white" >
+                                            <label class="form-control-label text-white">Address</label>    
+                                        </div>
+                        </ng-container>
+                        <ng-container *ngIf="UType==2" >
+                        <div class="form-group float-label active">
+                                <input type="text" [(ngModel)]="SelectedPlatform" disabled  name="isuname" class="form-control text-white" >
+                                <label class="form-control-label text-white">Social Platform</label>
+                            </div>
+                                <div class="form-group float-label active">
+                                        <input type="email"  [disabled]="Followers>=1000 && Shifted==false"  [(ngModel)]="Idata.SocialUserName" name="isuname" class="form-control text-white" >
+                                        <button id="btn_verify" [disabled]="Followers>=1000 && Shifted==false" (click)="CheckFollowers()" class="btnverify btn">Verify</button> 
+                                        <label class="form-control-label text-white">Social UserName *</label>
+                                    </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="Followers==1000 || Followers>1000 && UType==2 &&  Idata.SocialUserName !='' ">
+                                <div class="form-group float-label active">
+                                        <input type="text" [(ngModel)]="Idata.FirstName" name="iname" class="form-control text-white" >
+                                        <label class="form-control-label text-white">First Name <span style="color: white;font-size: 15px">*</span></label>
+                                    </div>
+    
+                                    <div class="form-group float-label active">
+                                        <input type="text" [(ngModel)]="Idata.LastName" name="ilname" class="form-control text-white" >
+                                        <label class="form-control-label text-white">Last Name </label>
+                                    </div>
+                                    <div class="form-group float-label active">
+                                        <input type="text" [(ngModel)]="Idata.UserName" name="iuser" class="form-control text-white" >
+                                        <label class="form-control-label text-white">Username <span style="color: white;font-size: 15px">*</span></label>
+                                    </div>
+                                    <div class="form-group float-label active">
+                                        <input type="email" [(ngModel)]="Idata.Email" name="imail" class="form-control text-white" >
+                                        <label class="form-control-label text-white">Email <span style="color: white;font-size: 15px">*</span></label>
+                                    </div>
+                                    <div class="form-group float-label active">
+                                            <input type="password" [(ngModel)]="Idata.Password" name="ipass"  class="form-control text-white" >
+                                            <label class="form-control-label text-white">Password <span style="color: white;font-size: 15px">*</span></label>
+                                    </div>
+                                    <div class="form-group float-label active">
+                                            <input type="text" [(ngModel)]="Idata.City" name="icity"  class="form-control text-white" >
+                                            <label class="form-control-label text-white">City</label>    
+                                        </div>                                
+                                        <div class="form-group float-label active">
+                                                <input type="text" [(ngModel)]="Idata.Address" name="iaddress"  class="form-control text-white" >
+                                                <label class="form-control-label text-white">Address</label>    
+                                            </div>
+
+                        </ng-container>
+                        
+                        <div class="form-group float-label position-relative">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" [(ngModel)]="Privacy" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Agree to <span (click)="ShowPrivacyPolicy()"><a style="color: lightblue" href="javascript:void()" data-toggle="modal" data-target="#exampleModalScrollable" >privacy policy</a> & </span> <span><a style="color: lightblue" href="javascript:void()"> terms and condition</a>  </span> </label>
+                            </div>
+                        </div>
+
+
+                   
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+   
+    <div class="row justify-content-center">
+        <div class="col" >
+            <a (click)="this.UType==1?RegisterBiz():RegisterInflauncer()" class="btn btn-default rounded btn-block">Sign up</a>
+        </div>
+    </div>
+  
+</main>
+</ion-content>
+<div class="modal fade"  id="exampleModalScrollable"  tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Privacy Policy</h5>
+                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>What is Lorem Ipsum?</h5>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+                    <h5>Why do we use it?</h5>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+                    <h5>Where does it come from?</h5>
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+
+                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

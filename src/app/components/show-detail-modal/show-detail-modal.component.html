@@ -1,0 +1,172 @@
+<ion-content>
+  <main class="flex-shrink-0 ">
+<div class="main-container">
+
+
+<ng-container *ngIf="this.helper.Modal.userModal">
+  <div class="col-md-4">
+      <!-- Widget: user widget style 1 -->
+      <div class="card card-widget widget-user" style="margin-bottom: 10px;border: rgb(218, 211, 211) solid 1px;">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header bg-info">
+          <h3 class="widget-user-username">{{UserDetail.FirstName}}</h3>
+          <h6 class="widget-user-desc"><span ><ion-icon name="logo-instagram"></ion-icon></span>{{UserDetail.SocialUserName}}</h6>
+        </div>
+        <div class="widget-user-image">
+          <img class="img-circle elevation-2" [src]="UserDetail.ProfilePic" onerror="this.src='assets/Content/img/user3.png'"  alt="User Avatar">
+          <!-- <span *ngIf="UserDetail.isVerified==1"><ion-icon style="color: green;font-weight: 800;font-size: 20px;" name="checkmark-circle-outline"></ion-icon></span> -->
+        </div>
+        <div class="card-footer" style="padding-left: 0px !important;">
+          <div class="row">
+            <div class="col-4 border-right">
+              <div class="description-block">
+                <h6 class="description-header">{{UserDetail.Rating}}</h6>
+                <span class="description-text">Stars</span>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-4 border-right">
+              <div class="description-block">
+                <h6 class="description-header">{{UserDetail.OrderCount}}</h6>
+                <span class="description-text">Orders</span>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <div class="description-block">
+                <h6 class="description-header">{{UserDetail.followercount}}</h6>
+                <p class="description-text">Followers</p>
+              </div>
+              <!-- /.description-block -->
+            </div>
+            <!-- <div class="row text-center">
+              <div class="col-6">
+                  <button class="btn btn-sm btn-default " style="width: 100%;" (click)="nav.goto_userdetail(item.$key)">View profile</button>
+              </div>
+              <div class="col-6">
+                  <button class="btn btn-sm btn-default " style="width: 100%;    display: flex;
+                  justify-content: center;
+                  align-items: flex-end;" (click)="goto_Instagram(item.SocialUserName)"><span><ion-icon name="logo-instagram"></ion-icon></span> Instagram</button>
+              </div>
+          </div> -->
+
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+        </div>
+      </div>
+
+      <!-- /.widget-user -->
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="this.helper.Modal.postModal">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <!-- <img class="card-img" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" alt="Bologna"> -->
+        <!-- <div class="card-img-overlay">
+          <a href="#" class="btn btn-light btn-sm">Cooking</a>
+        </div> -->
+        <div class="card-body">
+          <h4 class="card-title">{{PostDetail.Title}}</h4>
+          <small class="text-muted cat"  style="
+          align-items: center;">
+            <!-- <span class="material-icons" style="font-size: 14px;margin-bottom: 2px">schedule</span> -->{{PostDetail.CreatedDate}}
+            <i class="fas fa-users text-info"></i> Posted by you
+          </small>
+          <p class="card-text">{{PostDetail.Description}}</p>
+          
+          <div class="row">
+              <div class="col-12" style="display: flex;
+             
+              align-items: center;">
+                  <span class="material-icons text-success" >local_offer</span><span style="font-weight: bold;font-size: 15px;">Rs {{PostDetail.Price}}</span>  
+              </div>
+              <!-- <div class="col-6" (click)="nav.goto_postdetail(PostDetail.$key)">
+                  <a class="btn btn-info " style="float: right;">View Post</a>
+
+              </div> -->
+          </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+          <div  class="views" style="display: flex;
+          justify-content: center;
+          align-items: center;" ><span class="material-icons text-danger">favorite</span>{{PostDetail.TotalLike}}
+              
+          </div>
+          <div class="stats" style="display: flex;
+          justify-content: center;
+          align-items: center;">
+             
+             <span class="material-icons" >visibility</span>{{PostDetail.ViewCount}}
+            
+          </div>
+           
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="this.helper.Modal.proposalModal">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <!-- <img class="card-img" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" alt="Bologna"> -->
+        <!-- <div class="card-img-overlay">
+          <a href="#" class="btn btn-light btn-sm">Cooking</a>
+        </div> -->
+        <div class="card-body">
+          <!-- <h4 class="card-title">{{PostDetail.Title}}</h4> -->
+           <small class="cat text-primary"  style="
+          align-items: center;">
+           Sent On : {{ProposalDetail.CreatedDateTime | date:'dd-MMMM-yyyy - h:mm a'}}
+            
+          </small>
+          <p class="card-text">Description : {{ProposalDetail.Description}}</p>
+          
+          <div class="row">
+              <div class="col-12" style="display: flex;
+             
+              align-items: center;">
+                  <span class="material-icons text-primary small mr-1" style="font-size: 14px !important;" >payments </span><span class="small"> I Can Do With Rs {{ProposalDetail.Price}}</span>  
+              </div>
+              <!-- <div class="col-6" (click)="nav.goto_postdetail(PostDetail.$key)">
+                  <a class="btn btn-info " style="float: right;">View Post</a>
+
+              </div> -->
+          </div>
+          <div class="row">
+            <div class="col-12" style="display: flex;
+           
+            ">
+                <span class="material-icons text-primary small mr-1" style="font-size: 14px !important;">schedule</span><span class="small"> I can do it in {{ProposalDetail.Order_Delever_Days}} day(s) </span>  
+            </div>
+            <!-- <div class="col-6" (click)="nav.goto_postdetail(PostDetail.$key)">
+                <a class="btn btn-info " style="float: right;">View Post</a>
+
+            </div> -->
+        </div>
+        </div>
+        <!-- <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+          <div  class="views" style="display: flex;
+          justify-content: center;
+          align-items: center;" ><span class="material-icons text-danger">favorite</span>{{PostDetail.TotalLike}}
+              
+          </div>
+          <div class="stats" style="display: flex;
+          justify-content: center;
+          align-items: center;">
+             
+             <span class="material-icons" >visibility</span>{{PostDetail.ViewCount}}
+            
+          </div>
+           
+        </div> -->
+      </div>
+    </div>
+  </ng-container>
+</div>
+  </main>
+</ion-content>

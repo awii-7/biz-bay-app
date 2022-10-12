@@ -1,0 +1,23 @@
+.ng2-tag-input:focus{
+    border-bottom: 0px solid #2196f3 !important;
+    
+}
+
+.underline{
+ 
+    height: 130px;  
+    overflow: auto;   
+    border-bottom: none !important;   
+    border-bottom: 0px transparent !important;
+    overflow-x: hidden
+}
+
+.valid{
+    border: rgb(22, 181, 22) 1px solid !important;
+}
+.invalid{
+    border: rgb(255, 0, 0) 1px solid !important;
+}
+
+
+

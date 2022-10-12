@@ -1,0 +1,391 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0">
+                    
+          <a (click)="nav.goto_back()" class=" btn btn-40 btn-link">
+              <span class="material-icons">arrow_back</span>
+          </a>
+     
+      <h6 class="navbar-dash">My Proposals</h6>
+
+  </div>
+        <!-- <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div> -->
+        <div class="ml-auto col-auto pl-0">
+          <a (click)="nav.goto_notification()" class="btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+            <span class="badge" style="padding: 0% !important"
+              >{{this.api.NCount}}</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <ion-segment value="1" mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
+        <ion-segment-button value="all" layout="icon-start">
+          <span class="material-icons icons">list</span>
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="approved" layout="icon-start">
+          <!-- <span class="material-icons">list</span> -->
+          <span class="material-icons icons">done</span>
+          <ion-label>Approved</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending" layout="icon-start">
+          <span class="material-icons icons"> schedule</span>
+          <!-- <span class="material-icons">done_all</span> -->
+          <ion-label>Pending</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="rejected" layout="icon-start">
+          <span class="material-icons icons">clear</span>
+          <ion-label>Rejected</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </header>
+    <!-- All Proposals -->
+    <div class="main-container" *ngIf="segment=='all'" style="margin-top: 50px">
+      <div class="container">
+        <span
+          *ngIf="ProposalList.length==0"
+          style="text-align: center !important"
+        >
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of ProposalList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i>
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-5"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" *ngIf="p.Status !='C'" (click)="delete(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+
+                  <div class="col-7" *ngIf="p.Status =='C'" (click)="delete(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: green;
+                        border-color: greem;
+                      "
+                      >View Order</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+              class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+            >
+              <div *ngIf="!p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+              <!-- Proposal Status -->
+                  <span  class="material-icons">done</span>
+                  Delevered
+               
+              </div>
+              <div *ngIf="p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                <!-- Proposal Status -->
+                    <span  class="material-icons" style="color: #34B7F1;">done_all</span>
+                    Seen
+                </div>
+              <div
+                class="stats"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <span class="text-success" *ngIf="p.Status=='C'">Proposal Accepted</span>
+                <span class="text-warning" *ngIf="p.Status=='P'">Proposal Pending</span>
+                <span class="text-danger" *ngIf="p.Status=='R'">Proposal Rejected</span>
+           
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Approved Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='approved'"
+      style="margin-top: 50px"
+    >
+      <div class="container">
+        <span
+          *ngIf="isProposal==0"
+          style="text-align: center !important"
+        >
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of ProposalList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card" *ngIf="p.Status=='C'">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i>
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div *ngIf="p.Status !='C'" class="col-6" (click)="delete(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+              class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+            >
+              <div *ngIf="!p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+              <!-- Proposal Status -->
+                  <span  class="material-icons">done</span>
+                  Delevered
+               
+              </div>
+              <div *ngIf="p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                <!-- Proposal Status -->
+                    <span  class="material-icons" style="color: #34B7F1;">done_all</span>
+                    Seen
+                </div>
+              <div
+                class="stats"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+              <span class="text-success" *ngIf="p.Status=='C'">Proposal Accepted</span>
+                
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pending Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='pending'"
+      style="margin-top: 50px"
+    >
+      <div class="container">
+        <span
+        *ngIf="isProposal==0"
+          style="text-align: center !important"
+        >
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of ProposalList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card" *ngIf="p.Status=='P'">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i> 
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" (click)="delete(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+              >
+                <div *ngIf="!p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                <!-- Proposal Status -->
+                    <span  class="material-icons">done</span>
+                    Delevered
+                 
+                </div>
+                <div *ngIf="p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                  <!-- Proposal Status -->
+                      <span  class="material-icons" style="color: #34B7F1;">done_all</span>
+                      Seen
+                  </div>
+                <div
+                  class="stats"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                <span class="text-warning" *ngIf="p.Status=='P'">Proposal Pending</span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Rejected Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='rejected'"
+      style="margin-top: 50px"
+    >
+      <div class="container">
+        <span
+        *ngIf="isProposal==0"
+          style="text-align: center !important"
+        >
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of ProposalList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card" *ngIf="p.Status=='R'">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i> Post by {{p.UserName}}
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" (click)="delete(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+              >
+                <div *ngIf="!p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                <!-- Proposal Status -->
+                    <span  class="material-icons">done</span>
+                    Delevered
+                 
+                </div>
+                <div *ngIf="p.isSeen" style="display: flex;justify-content: center;align-items: center;">
+                  <!-- Proposal Status -->
+                      <span  class="material-icons" style="color: #34B7F1;">done_all</span>
+                      Seen
+                  </div>
+                <div
+                  class="stats"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                <span class="text-danger" *ngIf="p.Status=='R'">Proposal Rejected</span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</ion-content>

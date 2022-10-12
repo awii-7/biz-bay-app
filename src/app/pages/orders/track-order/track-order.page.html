@@ -1,0 +1,170 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0" *ngIf="OrderDetail">
+          <!-- <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+          <button class="btn btn-40 btn-link back-btn" (click)="nav.goto_back()" type="button">
+            <span class="material-icons">keyboard_arrow_left</span>
+          </button>
+          <h6 class="navbar-dash" *ngIf="OrderDetail.isSubmited==true && OrderDetail.isReviewed==true">Order Completed</h6>
+          <h6 class="navbar-dash" *ngIf="OrderDetail.isSubmited==false && OrderDetail.isReviewed==false">Track Order No #{{OrderDetail.OrderNo}}</h6>
+
+        </div>
+
+        <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container" *ngIf="OrderDetail">
+      
+     <div class="container">
+
+      <div class="row" >
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p class="mb-1">OrderNo #{{OrderDetail.OrderNo}} - {{OrderDetail.ProgressPercentage}}% completed</p>
+                        </div>
+                    </div>
+                    <div class="progress mt-3">
+                      <div class="progress-bar" role="progressbar" [style.width.%]="OrderDetail.ProgressPercentage" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">{{OrderDetail.ProgressPercentage}}%</div> 
+                    </div>
+
+                    <div class="row text-center mt-1" *ngIf="OrderDetail.ProgressPercentage<=99">
+                      <!-- <span><small>what to do?</small></span> -->
+                      <div class="col-6" *ngIf="this.helper.userData.$key==OrderDetail.InfluencerID">
+                          <button (click)="UpdateOrder()"  class="btn btn-sm btn-success pl-4 pr-4" >Update</button>
+                      </div>
+                      <div [class]="this.helper.userData.$key==OrderDetail.InfluencerID?'col-6':'col-12 text-center'">
+                          <button (click)="Purposal_Action('rejected')" class="btn btn-sm btn-danger pl-4 pr-4" >Cancel</button>
+                      </div>
+                  </div>
+                    <!-- <div class="col-auto align-self-center  pl-0">
+                      <button class="btn btn-sm btn-danger ">Cancel</button>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+        </div> 
+
+      <div class="contaimer m-3" >
+        <div class="card border-0">
+          <div class="card-header">
+              <div class="row align-items-center">
+                  <div class="col-auto pr-0" (click)="sendMessage()">
+                      <div class="avatar avatar-40 border-0 bg-success-light rounded-circle text-success">
+                          <i class="material-icons vm text-success">chat</i>
+                      </div>
+                  </div>
+                  <div class="col align-self-center  pr-0">
+                      <h6 class="mb-0">Chat with</h6>
+                      <p class="text-secondary" *ngIf="this.helper.userData.$key==OrderDetail.InfluencerID">Businessman</p>
+                      <p class="text-secondary" *ngIf="this.helper.userData.$key==OrderDetail.BizmanID">Influencer</p>
+                  </div>
+
+              </div>
+          </div>
+          <div class="card-body  bg-success-light">
+              <h1 class=" text-center mb-0 display-4">Rs {{OrderDetail.Price}}</h1>
+          </div>
+          <div class="card-footer  bg-success text-white">
+              <div class="row align-items-center">
+                  <div class="col">
+                      <p class="mb-0">{{OrderDetail.DeleveryDate.split(" ")[0]}}</p>
+                      <p class="small">Delevery Date</p>
+                  </div>
+            
+                  <div class="col-auto align-self-center text-right">
+                      <p class="mb-1" *ngIf="OrderDetail.ProgressPercentage<=99">{{OrderDetail.RemainingDateTime}}</p>
+                      <p class="mb-1" *ngIf="OrderDetail.ProgressPercentage==100">{{this.helper.RelativeTime(OrderDetail.RemainingDateTime)}}</p>
+                      <p class="" *ngIf="OrderDetail.isSubmited==true && OrderDetail.isReviewed==true">Order Delevered</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+
+
+
+          <div class="container" >
+
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <h4>Order Updates</h4>
+
+                <ul class="timeline" *ngFor="let item of OrderDetail.Comments;let i=index">
+                  <li>
+                    <a >{{item.completed}}%</a>
+                    <a  class="float-right">{{GetCommentTime(item.datetime)}}</a>
+                    <p>{{item.message}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div> 
+          </div>
+          <div class="row text-center mt-1" *ngIf="OrderDetail.ProgressPercentage==100">
+            <div class="col-12">
+                <button (click)="OrderConfirmSubmit()"  class="btn btn-lg btn-success pl-4 pr-4" *ngIf="OrderDetail.isSubmited==false" >Submit</button>
+                <button (click)="GotoReviewOrder()"  class="btn btn-sm btn-success pl-4 pr-4" *ngIf="OrderDetail.isSubmited==true && OrderDetail.WaitingForReview==true && this.helper.userData.UserType=='1'" >Mark as complete</button>
+                <button (click)="OrderConfirmSubmit()"  class="btn btn-lg btn-warning pl-4 pr-4" disabled *ngIf="OrderDetail.isSubmited==true && this.helper.userData.UserType=='2' && OrderDetail.isReviewed==false" >Waiting for businessman review</button>
+                
+                <!-- <button (click)="OpenPorposalModal()"  class="btn btn-lg btn-success pl-4 pr-4" >Review</button> -->
+                <div class="card mb-0" *ngIf="OrderDetail.isSubmited==true  && OrderDetail.isReviewed==true">
+                  <div class="card-header">
+                    <h4 *ngIf="OrderDetail.isSubmited==true && this.helper.userData.UserType=='2' && OrderDetail.isReviewed==true">Order Completed</h4>
+                    <h4 *ngIf="OrderDetail.isSubmited==true && this.helper.userData.UserType=='1' && OrderDetail.isReviewed==true">You Marked Order Completed</h4>
+                  </div>
+                  <div class="card-body  bg-white-light" *ngIf="OrderDetail.isSubmited==true  && OrderDetail.isReviewed==true">
+                      <!-- <div class="alert alert-success" role="alert">
+                          Businessman mark as order completed. Your payment will be recived by admin as soon as possible.
+                      </div> -->
+                      <h6 class="page-title p-1" *ngIf="this.helper.userData.UserType=='1'">You Reviewed</h6>
+                      <h6 class="page-title p-1" *ngIf="this.helper.userData.UserType=='2'">Businessman Review</h6>
+                      <div class="card " *ngIf="ReviewData">
+                          <div class="card-body">
+                              <h6>{{ReviewData.Review}}</h6>
+                          </div>
+                          <div class="card-footer">
+                              <div class="media">
+                                  <div class="media-body">
+                                      <h6 class="mb-1">{{ReviewData.ReviewFromName}}</h6>
+                                      <p class="text-mute small">
+                                        <ionic5-star-rating #rating  class="removeOutline"
+                                        activeIcon = "star"
+                                        defaultIcon = "star-outline"
+                                        activeColor = "#FFDF00" 
+                                        defaultColor = "#e3dede"
+                                        readonly="true"
+                                        rating="{{ReviewData.Rating}}"
+                                        fontSize = "35px"
+                                        (ratingChanged)="logRatingChange($event)">
+                                    </ionic5-star-rating>
+                                         </p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    
+                  </div>
+                  <!-- <div class="card-body  bg-white-light" *ngIf="OrderDetail.isSubmited==true && this.helper.userData.UserType=='1' && OrderDetail.isReviewed==true">
+                    <div class="alert alert-success" role="alert">
+                        Thanks for you order. Stay tuned for more our valuable influencers :)
+                    </div>
+                  
+                </div> -->
+              </div>
+              </div>
+
+        </div>
+        </div>
+  </main>
+</ion-content>

@@ -1,0 +1,211 @@
+    // ion-segment-button.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    //     border-bottom: 4px solid #ffde00 !important;
+    //     opacity: 1;
+    //     letter-spacing: 1px;
+    // }
+    ion-segment-button {
+        --indicator-box-shadow: transparent !important;
+        border-radius: 10px !important;
+        /* // padding: 0.7rem; */
+        border: 1px solid #053F1E !important;
+        margin: 1px;
+        --background: white;
+        --color: #053F1E !important;
+  
+        --background-checked: linear-gradient(45deg, #0b6332, #00230f) !important;
+  
+        --color-checked: white;
+        --indicator-color: transparent !important;
+        /* this solution */
+  
+      }
+      h6{
+        margin: 0;
+        line-height: 23px;
+        letter-spacing: 1px;
+      }
+      h5{
+        margin: 0;
+      }
+      h4{
+        margin-top: 0;
+      }
+      .panel-group {
+        margin-bottom: 2px;
+    }
+      .panel-title {
+        position: relative;
+      }
+        
+      .panel-title::after {
+        content: "\f107";
+        color: #333;
+        top: -2px;
+        right: 0px;
+        position: absolute;
+        font-family: "FontAwesome"
+      }
+      
+      .panel-title[aria-expanded="true"]::after {
+        content: "\f106";
+      }
+      
+      /*
+       * Added 12-27-20 to showcase full title clickthrough
+       */
+      
+      .panel-heading-full.panel-heading {
+        padding: 0;
+      }
+      
+      .panel-heading-full .panel-title {
+        padding: 10px 15px;
+      }
+      
+      .panel-heading-full .panel-title::after {
+        top: 10px;
+        right: 15px;
+      }
+      .panel-heading {
+        padding: 10px 1px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    .docicon{
+        font-size: 25px;
+        margin-right: 10px;
+    }
+    h4,h1{
+        margin: 0;
+    }
+
+    .ClasTabName:focus(){
+      border-color: transparent !important;
+    }
+
+    .loginForm {
+        /* padding: 0; */
+        position: absolute;
+        bottom: 0;
+        background: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 29px 12px;
+        margin-top: 20px;
+      }
+
+      .ClasTabName {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        font-size: 19px;
+        letter-spacing: 1px;
+        padding: 15px 15px;
+        position: relative;
+        top: -30px;
+        background: white;
+        box-shadow: 12px -17px 18px 0px #6b6a6a61;
+        /* display: inline-flex; */
+  
+      }
+
+      .ClasTxt {
+        color: #2c2c2c;
+  
+        font-weight: bold;
+      }
+
+      .hometxtgreen {
+        color: #23b573;
+      }
+      .notVerified {
+        color: red;
+      }
+      .floatleft{
+        float: left;
+      }
+
+      .uncheckedstar {
+        color: silver;
+        font-size: 12px;
+        padding: 1px;
+        position: relative;
+        /* float: left; */
+        top: 3px;
+        /* float: left; */
+      }
+
+      .checkedstar {
+        color: orange;
+        font-size: 12px;
+        padding: 1px;
+        position: relative;
+        /* float: left; */
+        top: 3px;
+        /* float: left; */
+      }
+
+      .CustomscrollContainer {
+        height: 40vh;
+        overflow-y: scroll;
+      }
+      .Txtgrey {
+        /* color: #B4B1B4; */
+        color: #898989;
+        /* font-weight: 600; */
+      }
+      .textred {
+
+        color: #ed1c24;
+      }
+  
+      .textgreen {
+        color: #99c939;
+      }
+  
+      .textblue {
+        color: #35b3ff;
+      }
+      .smalltxt {
+        /* color: black; */
+        font-size: 13.4px;
+  
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: 1px;
+      }
+      .containerpadding {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      .button1 {
+        width: 100%;
+        padding: 12px 0;
+        margin-bottom: 10px;
+        border-radius: 50px;
+        letter-spacing: 1px;
+  
+      }
+      .btnlogin {
+        text-align: center;
+        border-radius: 20px;
+        padding: 6px 48px;
+        /* background: #23b573; */
+        color: white;
+      }
+      .BgGreenColor {
+        background: #23b573;
+        color: white;
+  
+      }
+      .container-fluid {
+        padding: 0;
+      }
+  
+
+
+
+
+
+   
+

@@ -1,0 +1,129 @@
+
+        <ion-content fullscreen class="DoctorInfoBg"  *ngIf="userDetail">
+          <ion-row>
+            <div class="col-auto px-0">
+                <a (click)="nav.goto_back()"
+                   class=" btn btn-40 btn-link">
+                    <span class="material-icons">arrow_back</span>                     
+                </a>
+            </div>
+            
+            <h6 class="navbar-dash" style="margin-top: 10px !important;color: black !important;">Influencer Detail</h6>
+        
+              <!-- <div class="container-fluid ">
+                <ion-buttons slot="start">
+                  <ion-back-button></ion-back-button>
+                    <span><h6>Influencer Detail</h6></span>
+                </ion-buttons>
+                    
+      
+              </div> -->
+        
+              
+            <img [src]="userDetail.ProfilePic" class="DoctorInfoBg" onerror="this.src='assets/Content/img/user3.png'" />
+           
+      
+          </ion-row>
+      
+          <div class="container-fluid loginForm">
+
+            <div class="container ">
+              <button type="button" class="ClasTabName ClasTxt">
+                {{userDetail.FirstName}} {{userDetail.LastName}} &nbsp;&nbsp; <span>
+
+                  <ion-icon name="checkmark-circle"  class="hometxtgreen" *ngIf="userDetail.isVerified==1"></ion-icon>
+                  <ion-icon name="information-circle" class="notVerified" *ngIf="userDetail.isVerified==0"></ion-icon>
+                </span>
+                <br>
+                <ng-container *ngIf="userDetail.Rating>0">
+                  <span class="floatleft">
+                    <ion-icon name="star" class="checkedstar" *ngIf="userDetail.Rating>=1"></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="checkedstar" *ngIf="userDetail.Rating>=2"></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="checkedstar" *ngIf="userDetail.Rating>=3"></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="checkedstar" *ngIf="userDetail.Rating>=4"></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="checkedstar" *ngIf="userDetail.Rating==5"></ion-icon>
+                    <!-- {{userDetail.Rating}} -->
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="userDetail.Rating==0 || userDetail.Rating==''">
+                  <span class="floatleft">
+                    <ion-icon name="star" class="uncheckedstar" ></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="uncheckedstar" ></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="uncheckedstar" ></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="uncheckedstar" ></ion-icon>
+                  </span>
+                  <span class="floatleft">
+                    <ion-icon name="star" class="uncheckedstar" ></ion-icon>
+                    &nbsp;
+                    <small style="font-size: 60%;color: grey;">No Rating</small>
+                  </span>
+                </ng-container>
+              </button>
+              <div class="container CustomscrollContainer">
+      
+                <!-- <ion-row>
+                  <ion-col size="12">
+                    <h5 class="ClasTxt">Heart Specialist &nbsp;&nbsp;
+      
+                    </h5>
+                    <h6 class="Txtgrey">{{userDetail.Address}}</h6>
+      
+                  </ion-col>
+                </ion-row> -->
+                <br>
+                <ion-row>
+                  <ion-col size="12">
+                    <h5 class="ClasTxt">About &nbsp;&nbsp;
+                    </h5>
+                    <h6>
+                      {{userDetail.City}}
+                    </h6>
+                  </ion-col>
+                </ion-row>
+                <br>
+                <ion-row>
+                  <ion-col size="4" class="text-center">
+                    <h6 class="Txtgrey  ">Orders</h6>
+                    <h1 class="textred">{{userDetail.OrderCount}} <span class="smalltxt"></span></h1>
+      
+                  </ion-col>
+      
+                  <ion-col size="4" class="text-center">
+                    <h6 class="Txtgrey" style="white-space: nowrap;">Total Stars</h6>
+                    <h1 class="textblue">{{userDetail.TotalStars}} <span class="smalltxt"><ion-icon name="star"></ion-icon></span></h1>
+                   
+                  </ion-col>
+                  <ion-col size="4" class="text-center">
+                    <h6 class="Txtgrey ">Rating</h6>
+      
+                    <h1 class="textgreen">{{userDetail.Rating}}</h1>
+                  </ion-col>
+                </ion-row>
+                <br>
+                <div class="container containerpadding">
+                  <button type="button" (click)="sendMessage()" class="button1 btnlogin" style="line-height: normal;background-color: #00b4ff;"
+                   routerDirection="forward" >Send Message</button>
+                  </div>
+                  <!-- <div class="container containerpadding">
+                    <button type="button" class="button1 btnlogin" style="line-height: normal;background-color: #00b4ff;"
+                    routerLink="/book-appointment" routerDirection="forward" >Hire Influencer</button>
+                    </div> -->
+              </div>
+            </div>
+          </div>
+        </ion-content>
+

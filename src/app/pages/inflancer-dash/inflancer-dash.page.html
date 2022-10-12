@@ -1,0 +1,85 @@
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+   
+        <header class="header">
+            <div class="row">
+                <div class="col-auto px-0">
+                    <a (click)="SideMnu()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">menu</span>                     
+                    </a>
+                </div>
+                
+                <h6 class="navbar-dash" style="margin-top: 10px !important;">Influencer Dashboard</h6>
+                <div class="ml-auto col-auto pl-0">
+
+                    <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                        <span class="material-icons">notifications_none</span>
+              <span class="counter"></span>
+                        <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                       
+                    </a>
+                </div>
+            </div>
+            
+        </header>
+        <div class="main-container">
+        <div class="container ">
+          <div class="row">
+              <div class="col text-center">
+                  <h3 class="subtitle">{{Greeting}}, <b>{{this.helper.userData.FirstName}}</b></h3>
+                  <!-- <p class="text-secondary">{{time}}</p> -->
+                 
+              </div>
+          </div>
+          <div class="row text-center mt-3" >
+              <div class="col-6 col-md-3" [hidden]="this.helper.userData.UserType==='2'">
+                  <div class="card border-0 mb-4">
+                      <div class="card-body" (click)="nav.goto_influencerList()">
+                          <div class="avatar avatar-60 bg-default-light rounded-circle text-default">
+                              <i class="material-icons vm md-36 text-template">people</i>
+                          </div>
+                          <!-- <h3 class="mt-3 mb-0 font-weight-normal">{{TotalInfluencer}}</h3> -->
+                          <p class="text-secondary small">Influencers</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6 col-md-3">
+                  <div class="card border-0 mb-4">
+                      <div class="card-body" (click)="nav.goto_myproposal(true)">
+                          <div class="avatar avatar-60 bg-default-light rounded-circle text-default">
+                              <i class="material-icons vm md-36 text-template">fact_check</i>
+                          </div>
+                          <!-- <h3 class="mt-3 mb-0 font-weight-normal">{{TotalProposal}}</h3> -->
+                          <p class="text-secondary small">Sent Proposals</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6 col-md-3">
+                  <div class="card border-0 mb-4">
+                      <div class="card-body" (click)="nav.goto_postlist()">
+                          <div class="avatar avatar-60 bg-default-light rounded-circle text-default">
+                              <i class="material-icons vm md-36 text-template">dynamic_feed</i>
+                          </div>
+                          <!-- <h3 class="mt-3 mb-0 font-weight-normal">1542</h3> -->
+                          <p class="text-secondary small">Posts</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6 col-md-3">
+                  <div class="card border-0 mb-4">
+                      <div class="card-body" (click)="nav.goto_ordersLists()">
+                          <div class="avatar avatar-60 bg-default-light rounded-circle text-default">
+                              <i class="material-icons vm md-36 text-template">task</i>
+                          </div>
+                          <!-- <h3 class="mt-3 mb-0 font-weight-normal">154</h3> -->
+                          <p class="text-secondary small">My Orders</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+
+     
+    </main>
+</ion-content>

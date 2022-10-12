@@ -1,0 +1,595 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0">
+                    
+          <a (click)="nav.goto_back()" class=" btn btn-40 btn-link">
+              <span class="material-icons">arrow_back</span>
+          </a>
+     
+      <h6 class="navbar-dash">Recived Proposals</h6>
+
+  </div>
+        <!-- <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div> -->
+        <div class="ml-auto col-auto pl-0">
+          <a (click)="nav.goto_notification()" class="btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+            <span class="badge" style="padding: 0% !important"
+              >{{this.api.NCount}}</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <ion-segment value="1" mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
+        <ion-segment-button value="all" layout="icon-start">
+          <span class="material-icons icons">list</span>
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="approved" layout="icon-start">
+          <!-- <span class="material-icons">list</span> -->
+          <span class="material-icons icons">done</span>
+          <ion-label>Approved</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending" layout="icon-start">
+          <span class="material-icons icons"> schedule</span>
+          <!-- <span class="material-icons">done_all</span> -->
+          <ion-label>Pending</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="rejected" layout="icon-start">
+          <span class="material-icons icons">clear</span>
+          <ion-label>Rejected</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </header>
+    <!-- All Proposals -->
+    <div class="main-container" *ngIf="segment=='all'" style="margin-top: 50px">
+      <!-- <h5 class="text-center" *ngIf="ProposalList.length==0">You have {{ProposalList.length}} Proposals</h5> -->
+      <!-- [ngStyle]="{'background-color':this.helper.activeProposal==n.key ? 'bisque' : 'transparent' }" -->
+      <ng-container *ngFor="let n of ProposalList;let i=index" >
+          <div class="card" style="margin-bottom: 2px !important;">
+              <div class="card-body px-0" style="padding: 0px !important;">
+                  <div class="list-group list-group-flush">
+                      <a class="list-group-item" style="text-decoration: none;">
+                          <div class="row">
+                              <div (click)="show()" class="col-auto align-self-center">
+                              <span class="material-icons" *ngIf="this.helper.activeProposal !=n.key">post_add</span>
+                                  <span class="blink-image" *ngIf="this.helper.activeProposal==n.key"><img src="assets/Content/img/new_24px.png" /></span>
+                              </div>
+                              <div class="col pl-0 ">
+                                  <div class="row mb-1">
+                                      <div class="col">
+                                          <p class="mb-0">{{n.Description}}</p>
+                                      </div>
+                                      <div class="col-auto pl-0">
+                                          <p class="small text-secondary">{{this.helper.RelativeTime(n.CreatedDateTime)}}
+
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <p class="small text-secondary"><b class="text-primary"><a (click)="GetInfluencer(n.Porposal_Sent_By.key)" class="text-primary">{{n.Porposal_Sent_By.FirstName}} {{n.Porposal_Sent_By.LastName}}</a></b> 
+                                      sent you <b class="text-primary "><a (click)="GetProposal(n.key)" class="text-primary">Proposal</a></b>  on your
+                                      <b class="text-primary text-uppercase"><a (click)="GetPost(n.Porposal_on_Post.key)" class="text-primary">Post</a></b></p>       
+                              </div>
+                          </div>
+                          <div class="row text-center mt-1" *ngIf="n.Status=='P'">
+                              <!-- <span><small>what to do?</small></span> -->
+                              <div class="col-6">
+                                  <button (click)="MakeOrder(i)"  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button>
+                              </div>
+                              <div class="col-6">
+                                  <button (click)="ConfirmReject(n.key,i)" class="btn btn-sm btn-danger pl-4 pr-4" >Reject</button>
+                              </div>
+                          </div>
+                          <div class="row mt-1 text-success border-top mt-2" *ngIf="n.Status=='C'">
+                              <!-- <span><small>what to do?</small></span> -->
+                              <div class="col-2 mt-2">
+                                  <span class="material-icons ">done_all</span>
+                                  <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                              </div>
+                              <div class="col-10">
+                                  <small class="small">You Have Accepted this <span style="text-decoration: underline;"><b><a class="text-success">Proposal</a></b></span> on <span><b>{{this.helper.RelativeTime(n.ModifiedOn)}}</b></span> </small>
+
+                              </div>
+                          </div>
+
+                          <div class="row mt-1 text-danger border-top mt-2" *ngIf="n.Status=='R'" >
+                              <!-- <span><small>what to do?</small></span> -->
+                              <div class="col-2 mt-2">
+                                  <span class="material-icons ">remove_circle</span>
+                                  <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                              </div>
+                              <div class="col-10">
+                                  <small class="small">You Have Rejected this <span style="text-decoration: underline;"><b><a class="text-danger">Proposal</a></b></span><br> ({{this.helper.RelativeTime(n.ModifiedOn)}}) </small>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </ng-container>
+    </div>
+    <!-- Approved Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='approved'"
+      style="margin-top: 50px"
+    >
+    <ng-container *ngFor="let n of ProposalList">
+      <div class="card" style="margin-bottom: 2px !important;" *ngIf="n.Status=='C'">
+          <div class="card-body px-0" style="padding: 0px !important;">
+              <div class="list-group list-group-flush">
+                  <a class="list-group-item" style="text-decoration: none;">
+                      <div class="row">
+                          <div (click)="show()" class="col-auto align-self-center">
+                              <span class="material-icons">post_add</span>
+                          </div>
+                          <div class="col pl-0 ">
+                              <div class="row mb-1">
+                                  <div class="col">
+                                      <p class="mb-0">{{n.Description}}</p>
+                                  </div>
+                                  <div class="col-auto pl-0">
+                                      <p class="small text-secondary">{{n.CreatedDateTime | date:'short'}}
+
+                                      </p>
+                                  </div>
+                              </div>
+                              <p class="small text-secondary"><b class="text-primary"><a (click)="GetInfluencer(n.Porposal_Sent_By.key)" class="text-primary">{{n.Porposal_Sent_By.FirstName}} {{n.Porposal_Sent_By.LastName}}</a></b> 
+                                  sent you <b class="text-primary "><a (click)="GetProposal(n.key)" class="text-primary">Proposal</a></b>  on your
+                                  <b class="text-primary text-uppercase"><a (click)="GetPost(n.Porposal_on_Post.key)" class="text-primary">Post</a></b></p>       
+                          </div>
+
+                      </div>
+                      <div class="row text-center mt-1" *ngIf="n.Status=='P'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-6">
+                              <button (click)="CheckIfProposalExist(n.ProposalID,n.key)"  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button>
+                          </div>
+                          <div class="col-6">
+                              <button (click)="Purposal_Action('rejected')" class="btn btn-sm btn-danger pl-4 pr-4" >Reject</button>
+                          </div>
+                      </div>
+                      <div class="row mt-1 text-success border-top mt-2" *ngIf="n.Status=='C'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">done_all</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                          <div class="col-10">
+                              <small class="small">You Have Accepted this <span style="text-decoration: underline;"><b><a (click)="GetProposal(n.key)" class="text-success">Proposal</a></b></span> on <span><b>{{n.ModifiedOn | date:'short'}}</b></span> </small>
+
+                          </div>
+                      </div>
+
+                      <div class="row mt-1 text-danger border-top mt-2" *ngIf="n.Status=='R'" >
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">remove_circle</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                          <div class="col-10">
+                              <small class="small">You Have Rejected this <span style="text-decoration: underline;"><b><a class="text-danger">Proposal</a></b></span> on <span><b>{{n.ModifiedOn | date:'short'}}</b></span> </small>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </ng-container>
+    </div>
+    <!-- Pending Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='pending'"
+      style="margin-top: 50px"
+    >
+    <ng-container *ngFor="let n of ProposalList">
+      <div class="card" style="margin-bottom: 2px !important;" *ngIf="n.Status=='P'">
+          <div class="card-body px-0" style="padding: 0px !important;">
+              <div class="list-group list-group-flush">
+                  <a class="list-group-item" style="text-decoration: none;">
+                      <div class="row">
+                          <div (click)="show()" class="col-auto align-self-center">
+                              <span class="material-icons">post_add</span>
+                          </div>
+                          <div class="col pl-0 ">
+                              <div class="row mb-1">
+                                  <div class="col">
+                                      <p class="mb-0">{{n.Description}}</p>
+                                  </div>
+                                  <div class="col-auto pl-0">
+                                      <p class="small text-secondary">{{n.CreatedDateTime | date:'short'}}
+
+                                      </p>
+                                  </div>
+                              </div>
+                              <p class="small text-secondary"><b class="text-primary"><a (click)="GetInfluencer(n.Porposal_Sent_By.key)" class="text-primary">{{n.Porposal_Sent_By.FirstName}} {{n.Porposal_Sent_By.LastName}}</a></b> 
+                                  sent you <b class="text-primary "><a (click)="GetProposal(n.key)" class="text-primary">Proposal</a></b>  on your
+                                  <b class="text-primary text-uppercase"><a (click)="GetPost(n.Porposal_on_Post.key)" class="text-primary">Post</a></b></p>       
+                          </div>
+
+                      </div>
+                      <div class="row text-center mt-1" *ngIf="n.Status=='P'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-6">
+                              <button (click)="CheckIfProposalExist(n.ProposalID,n.key)"  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button>
+                          </div>
+                          <div class="col-6">
+                              <button (click)="Purposal_Action('rejected')" class="btn btn-sm btn-danger pl-4 pr-4" >Reject</button>
+                          </div>
+                      </div>
+                      <div class="row mt-1 text-success border-top mt-2" *ngIf="n.Status=='C'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">done_all</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                          <div class="col-10">
+                              <small class="small">You Have Accepted this <span style="text-decoration: underline;"><b><a class="text-success">Proposal</a></b></span> on <span><b>15 April 2021</b> (3 days ago).</span> </small>
+
+                          </div>
+                      </div>
+
+                      <div class="row mt-1 text-danger border-top mt-2" *ngIf="n.Status=='R'" >
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">remove_circle</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                          <div class="col-10">
+                              <small class="small">You Have Rejected this <span style="text-decoration: underline;"><b><a class="text-danger">Proposal</a></b></span> on <span><b>15 April 2021</b> (3 days ago).</span> </small>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </ng-container>
+    </div>
+    <!-- Rejected Proposals -->
+    <div
+      class="main-container"
+      *ngIf="segment=='rejected'"
+      style="margin-top: 50px"
+    >
+    <ng-container *ngFor="let n of ProposalList">
+      <div class="card" style="margin-bottom: 2px !important;" *ngIf="n.Status=='R'">
+          <div class="card-body px-0" style="padding: 0px !important;">
+              <div class="list-group list-group-flush">
+                  <a class="list-group-item" style="text-decoration: none;">
+                      <div class="row">
+                          <div (click)="show()" class="col-auto align-self-center">
+                              <span class="material-icons">post_add</span>
+                          </div>
+                          <div class="col pl-0 ">
+                              <div class="row mb-1">
+                                  <div class="col">
+                                      <p class="mb-0">{{n.Description}}</p>
+                                  </div>
+                                  <div class="col-auto pl-0">
+                                      <p class="small text-secondary">{{this.helper.RelativeTime(n.CreatedDateTime)}}
+
+                                      </p>
+                                  </div>
+                              </div>
+                              <p class="small text-secondary"><b class="text-primary"><a (click)="GetInfluencer(n.Porposal_Sent_By.key)" class="text-primary">{{n.Porposal_Sent_By.FirstName}} {{n.Porposal_Sent_By.LastName}}</a></b> 
+                                  sent you <b class="text-primary "><a (click)="GetProposal(n.key)" class="text-primary">Proposal</a></b>  on your
+                                  <b class="text-primary text-uppercase"><a (click)="GetPost(n.Porposal_on_Post.key)" class="text-primary">Post</a></b></p>       
+                          </div>
+
+                      </div>
+                      <div class="row text-center mt-1" *ngIf="n.Status=='P'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-6">
+                              <button (click)="CheckIfProposalExist(n.ProposalID,n.key)"  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button>
+                          </div>
+                          <div class="col-6">
+                              <button (click)="Purposal_Action('rejected')" class="btn btn-sm btn-danger pl-4 pr-4" >Reject</button>
+                          </div>
+                      </div>
+                      <div class="row mt-1 text-success border-top mt-2" *ngIf="n.Status=='C'">
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">done_all</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                          <div class="col-10">
+                              <small class="small">You Have Accepted this <span style="text-decoration: underline;"><b><a class="text-success">Proposal</a></b></span> on <span><b>15 April 2021</b> (3 days ago).</span> </small>
+
+                          </div>
+                      </div>
+
+                      <div class="row mt-1 text-danger border-top mt-2" *ngIf="n.Status=='R'" >
+                          <!-- <span><small>what to do?</small></span> -->
+                          <div class="col-2 mt-2">
+                              <span class="material-icons ">remove_circle</span>
+                              <!-- <button  class="btn btn-sm btn-success pl-4 pr-4" >Accept</button> -->
+                          </div>
+                      
+                            <div class="col-10">
+                                <small class="small">You Have Rejected this <span style="text-decoration: underline;"><b><a class="text-danger">Proposal</a></b></span><br> ({{this.helper.RelativeTime(n.ModifiedOn)}}) </small>
+                            </div>
+                          
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </ng-container>
+    </div>
+
+               <!-- Influencer Detail Modal -->
+               <div *ngIf="userData"
+               class="modal"
+               id="myModal"
+               [style.display]="showInfluencerModal ? 'block' : 'none'"
+               style="top: 0; background: #020202ad; height: 100%; padding-top: 45%"
+             >
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <!-- Modal Header -->
+                   <div class="modal-header">
+                     <h4 class="modal-title ClasTxt">Influencer Detail</h4>
+       
+                     <button
+                       type="button"
+                       class="close"
+                       data-dismiss="modal"
+                       (click)="HideInfluencerModal()"
+                     >
+                       &times;
+                     </button>
+                   </div>
+       
+                   <!-- Modal body -->
+                   <div class="modal-body">
+                     <ion-row>
+                       <ion-col size="3">
+                         <img [src]="userData.ProfilePic" onerror='this.src="assets/Content/img/user3.png"' style="border-radius: 50%;     width: 80%;
+                         height: 50%;" />
+                       </ion-col>
+                       <ion-col size="9" style="padding-left: 0">
+                         <h6 class="ClasTxt">{{userData.FirstName}} {{userData.LastName}}  </h6>
+                         <p class="Txtgrey mb-2">Influencer</p>
+                         <ion-row>
+                           <ion-col size="1" style="padding: 0">
+                             <ion-icon name="location" class="textgreen"></ion-icon>
+                           </ion-col>
+                           <ion-col size="11" style="padding: 0">
+                             <p class="lightgrey modalsmalltxt">
+                               {{userData.Address}}
+                             </p>
+                           </ion-col>
+                         </ion-row>
+                       </ion-col>
+                     </ion-row>
+                     <br />
+                     <ion-row>
+                       <ion-col size="4" style="padding-right: 0">
+                         <button type="button" class="btnblocks">
+                           <p class="Txtgrey">Stars</p>
+       
+                           <h6 class="ClasTxt">{{userData.Rating}}</h6>
+                         </button>
+                       </ion-col>
+       
+                       <ion-col size="4">
+                         <button type="button" class="btnblocks" style="background: none">
+                           <p class="Txtgrey">Orders</p>
+       
+                           <h6 class="ClasTxt">{{userData.OrderCount}}</h6>
+                         </button>
+                       </ion-col>
+                       <ion-col size="4">
+                           <button type="button" class="" style="background: none">
+                             <p class="Txtgrey">Followers</p>
+         
+                             <h6 class="ClasTxt">{{userData.followercount}}</h6>
+                           </button>
+                         </ion-col>
+                     </ion-row>
+                     <br />
+                     <ion-row>
+                       <ion-col size="3"></ion-col>
+                       <ion-col size="6">
+                         <button
+                           type="button"
+                           class="button1 btnlogin BgGreenColor"
+                           data-dismiss="modal"
+                           (click)="HideInfluencerModal()"
+                 
+                         >
+                           OK
+                         </button>
+                       </ion-col>
+                       <ion-col size="3"></ion-col>
+                     </ion-row>
+                   </div>
+                 </div>
+               </div>
+             </div>
+   
+             <div *ngIf="proposalData"
+             class="modal"
+             id="myModal"
+             [style.display]="showProposalModal ? 'block' : 'none'"
+             style="top: 0; background: #020202ad; height: 100%; padding-top: 45%"
+           >
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                   <h4 class="modal-title ClasTxt">Proposal Detail</h4>
+     
+                   <button
+                     type="button"
+                     class="close"
+                     data-dismiss="modal"
+                     (click)="HideProposalModal()"
+                   >
+                     &times;
+                   </button>
+                 </div>
+     
+                 <!-- Modal body -->
+                 <div class="modal-body">
+                   <ion-row>
+                     <ion-col size="3">
+                       <!-- <img src="assets/Content/img/user3.png" style="border-radius: 50%;" /> -->
+                     </ion-col>
+                     <ion-col size="9" style="padding-left: 0">
+                       <h6 class="ClasTxt">Proposal sent by {{proposalData.Porposal_Sent_By.FirstName}} {{proposalData.Porposal_Sent_By.LastName}}  </h6>
+                       <p class="Txtgrey mb-2">Description</p>
+                       <ion-row>
+                         <ion-col size="1" style="padding: 0">
+                           <ion-icon name="create" class="textgreen"></ion-icon>
+                         </ion-col>
+                         <ion-col size="11" style="padding: 0">
+                           <p class="lightgrey modalsmalltxt">
+                             {{proposalData.Description}}
+                           </p>
+                         </ion-col>
+                       </ion-row>
+                     </ion-col>
+                   </ion-row>
+                   <br />
+                   <ion-row>
+                     <ion-col size="6" style="padding-right: 0">
+                       <button type="button" class="btnblocks">
+                         <p class="Txtgrey">Price Offer</p>
+     
+                         <h6 class="ClasTxt">{{proposalData.Price}}</h6>
+                       </button>
+                     </ion-col>
+     
+                     <ion-col size="6">
+                       <button type="button" class="btnblocks1" style="background: none">
+                         <p class="Txtgrey">Delever in </p>
+     
+                         <h6 class="ClasTxt">{{proposalData.Order_Delever_Days}} Day(s)</h6>
+                       </button>
+                     </ion-col>
+   
+                   </ion-row>
+                   <br />
+                   <ion-row>
+                     <ion-col size="3"></ion-col>
+                     <ion-col size="6">
+                       <button
+                         type="button"
+                         class="button1 btnlogin BgGreenColor"
+                         data-dismiss="modal"
+                         (click)="HideProposalModal()"
+               
+                       >
+                         OK
+                       </button>
+                     </ion-col>
+                     <ion-col size="3"></ion-col>
+                   </ion-row>
+                 </div>
+               </div>
+             </div>
+           </div>
+   
+           <div *ngIf="postlData"
+           class="modal"
+           id="myModal"
+           [style.display]="showPostModal ? 'block' : 'none'"
+           style="top: 0; background: #020202ad; height: 100%; padding-top: 45%"
+         >
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <!-- Modal Header -->
+               <div class="modal-header">
+                 <h4 class="modal-title ClasTxt">Post Detail</h4>
+   
+                 <button
+                   type="button"
+                   class="close"
+                   data-dismiss="modal"
+                   (click)="HidePostModal()"
+                 >
+                   &times;
+                 </button>
+               </div>
+   
+               <!-- Modal body -->
+               <div class="modal-body">
+                 <ion-row>
+                   <ion-col size="3">
+                     <!-- <img src="assets/Content/img/user3.png" style="border-radius: 50%;" /> -->
+                   </ion-col>
+                   <ion-col size="9" style="padding-left: 0">
+                     <h6 class="ClasTxt">{{postlData.Title}} </h6>
+                     <p class="Txtgrey mb-2">{{postlData.CreatedDateTime}}</p>
+                     <ion-row>
+                       <ion-col size="1" style="padding: 0">
+                         <ion-icon name="create" class="textgreen"></ion-icon>
+                       </ion-col>
+                       <ion-col size="11" style="padding: 0">
+                         <p class="lightgrey modalsmalltxt">
+                           {{postlData.Description}}
+                         </p>
+                       </ion-col>
+                     </ion-row>
+                   </ion-col>
+                 </ion-row>
+                 <br />
+                 <ion-row>
+                   <ion-col size="4" style="padding-right: 0">
+                     <button type="button" class="btnblocks">
+                       <p class="Txtgrey">Price</p>
+   
+                       <h6 class="ClasTxt">{{postlData.Price}}</h6>
+                     </button>
+                   </ion-col>
+   
+                   <ion-col size="4">
+                     <button type="button" class="btnblocks1" style="background: none">
+                       <p class="Txtgrey">Views </p>
+   
+                       <h6 class="ClasTxt">{{postlData.ViewCount}}</h6>
+                     </button>
+                   </ion-col>
+   
+                   
+                   <ion-col size="4">
+                       <button type="button" class="btnblocks1" style="background: none">
+                         <p class="Txtgrey">Likes </p>
+     
+                         <h6 class="ClasTxt">{{postlData.TotalLike}}</h6>
+                       </button>
+                     </ion-col>
+   
+                 </ion-row>
+                 <br />
+                 <ion-row>
+                   <ion-col size="3"></ion-col>
+                   <ion-col size="6">
+                     <button
+                       type="button"
+                       class="button1 btnlogin BgGreenColor"
+                       data-dismiss="modal"
+                       (click)="HidePostModal()"
+             
+                     >
+                       OK
+                     </button>
+                   </ion-col>
+                   <ion-col size="3"></ion-col>
+                 </ion-row>
+               </div>
+             </div>
+           </div>
+         </div>
+  </main>
+</ion-content>

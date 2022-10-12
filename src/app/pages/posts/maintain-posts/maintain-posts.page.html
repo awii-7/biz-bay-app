@@ -1,0 +1,233 @@
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+
+        <header class="header">
+            <div class="row">
+                <div class="col-auto px-0">
+                    <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff">
+                    </ion-menu-button>
+                    <h6 class="navbar-dash">Profile</h6>
+
+                </div>
+
+                <div class="ml-auto col-auto pl-0">
+                    <button type="button" class="btn btn-link btn-40 colorsettings">
+                        <span class="material-icons">color_lens</span>
+                    </button>
+                    <a href="notification.html" class=" btn btn-40 btn-link">
+                        <span class="material-icons">notifications_none</span>
+                        <span class="counter"></span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="main-container">
+
+            <div class="container">
+                <div class="card mb-4">
+                    <div class="card-header">
+
+                        <h3 class="mb-0">Add Posts</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- <div *ngIf="!PostImagePath" (click)="presentActionSheet()" class="container mb-4 text-center">
+                      <div class="card bg-default-secondary shadow-default">
+                          <div class="card-body">
+                              
+                              <div class="swiper-container addsendcarousel text-center">
+                                  <div class="swiper-wrapper mb-4 postImage">
+                                      <a href="javascript:void()" class="swiper-slide text-white" style="padding-top: 15px">
+                                          <div class="icon icon-50 rounded-circle mb-2 bg-white-light"><span class="material-icons">add</span></div>
+                                          <p class="imageFont"><small>Choose image</small></p>
+                                      </a>
+                                  </div>
+                                  
+                                  <div class="swiper-pagination"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div> -->
+                        <!-- <div *ngIf="PostImagePath" (click)="presentActionSheet()" class="container mb-4 text-center">
+                      <div class="card bg-default-secondary shadow-default">
+                          <div class="card-body">
+                            
+                              <div class="swiper-container addsendcarousel text-center">
+                                  <div class="swiper-wrapper mb-4 postImage">
+                    
+                                      <img [src]="PostImagePath"  />
+                                  </div>
+                          
+                                  <div class="swiper-pagination"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div> -->
+                        <!-- <button (click)="UploadPostImage()">Upload image</button> -->
+                        <form [formGroup]="postForm" (ngSubmit)="formSubmit(postForm.value)">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Post Title *</label>
+                                <input type="text" formControlName="Title" class="form-control" [class.valid]="postForm.get('Title').valid && 
+        (postForm.get('Title').dirty || postForm.get('Title').touched)" [class.invalid]="postForm.get('Title').invalid && 
+        (postForm.get('Title').dirty || postForm.get('Title').touched)" id="exampleFormControlInput1"
+                                    placeholder="Post title" />
+                                <!-- Error messages -->
+                                <div class="alert alert-danger"
+                                    *ngIf="postForm.get('Title').invalid && postForm.get('Title').errors && (postForm.get('Title').dirty || postForm.get('Title').touched)"
+                                    style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+                                    <small class="text-danger" *ngIf="postForm.get('Title').hasError('required')">
+                                        Post title is required.
+                                    </small>
+                                    <small class="text-danger" *ngIf="postForm.get('Title').hasError('cannotContainSpace')">
+                                      No Spaces
+                                    </small>
+                                    <small class="text-danger" *ngIf="postForm.get('Title').hasError('minlength')">
+                                        The minimum length for this field is
+                                        {{postForm.get('Title').errors.minlength.requiredLength}} characters.
+                                    </small>
+                                    <small class="text-danger" *ngIf="postForm.get('Title').hasError('maxlength')">
+                                        The maximum length for this field is
+                                        {{postForm.get('Title').errors.maxlength.requiredLength}} characters.
+                                    </small>
+                                </div>
+                                <!-- Success messages -->
+                                <div class="alert alert-success"
+                                    *ngIf="postForm.get('Title').valid && (postForm.get('Title').dirty || postForm.get('Title').touched)"
+                                    style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                                    <div class="text-success" *ngIf="postForm.get('Title').valid">
+                                        <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                                        <small>Success</small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput2">Description</label>
+                                <textarea type="email" formControlName="Description" rows="4" class="form-control "
+                                    id="exampleFormControlInput2" placeholder="Description"
+                                    [class.valid]="postForm.get('Description').valid && 
+        (postForm.get('Description').dirty || postForm.get('Description').touched)" [class.invalid]="postForm.get('Description').invalid && 
+        (postForm.get('Description').dirty || postForm.get('Description').touched)" 
+                                    ></textarea>
+
+                                <!-- Error messages -->
+                                <div class="alert alert-danger"
+                                    *ngIf="postForm.get('Description').invalid && postForm.get('Description').errors && (postForm.get('Description').dirty || postForm.get('Description').touched)"
+                                    style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+
+                                    <small class="text-danger" *ngIf="postForm.get('Description').hasError('required')">
+                                        This field is required.
+                                    </small>
+                                    <small class="text-danger"
+                                        *ngIf="postForm.get('Description').hasError('minlength')">
+                                        The minimum length for this field is
+                                        {{postForm.get('Description').errors.minlength.requiredLength}} characters.
+                                    </small>
+                                    <small class="text-danger"
+                                        *ngIf="postForm.get('Description').hasError('maxlength')">
+                                        The maximum length for this field is
+                                        {{postForm.get('Description').errors.maxlength.requiredLength}} characters.
+                                    </small>
+                                </div>
+                                <div class="alert alert-success"
+                                *ngIf="postForm.get('Description').valid && (postForm.get('Description').dirty || postForm.get('Description').touched)"
+                                style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                                <div class="text-success" *ngIf="postForm.get('Description').valid">
+                                    <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                                    <small>Success</small>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Price</label>
+                                <input type="text" formControlName="Price" class="form-control" type="number"
+                                    id="exampleFormControlInput1" placeholder="Rs ..." 
+                                    [class.valid]="postForm.get('Price').valid && 
+                                    (postForm.get('Price').dirty || postForm.get('Price').touched)" [class.invalid]="postForm.get('Price').invalid && 
+                                    (postForm.get('Price').dirty || postForm.get('Price').touched)" 
+                                    />
+
+                                    <!-- Error messages -->
+                                <div class="alert alert-danger"
+                                *ngIf="postForm.get('Price').invalid && postForm.get('Price').errors && (postForm.get('Price').dirty || postForm.get('Price').touched)"
+                                style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+
+                                <small class="text-danger" *ngIf="postForm.get('Price').hasError('required')">
+                                   Price is required.
+                                </small>
+                                <small class="text-danger"
+                                    *ngIf="postForm.get('Price').hasError('minlength')">
+                                    The minimum length for this field is
+                                    {{postForm.get('Price').errors.minlength.requiredLength}} characters.
+                                </small>
+                                <small class="text-danger"
+                                    *ngIf="postForm.get('Price').hasError('maxlength')">
+                                    The maximum length for this field is
+                                    {{postForm.get('Price').errors.maxlength.requiredLength}} characters.
+                                </small>
+                            </div>
+                            <div class="alert alert-success"
+                            *ngIf="postForm.get('Price').valid && (postForm.get('Price').dirty || postForm.get('Price').touched)"
+                            style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+
+                            <div class="text-success" *ngIf="postForm.get('Price').valid">
+                                <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                                <small>Success</small>
+                            </div>
+                        </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput2">Tags <span
+                                        style="font-size: smaller;color: silver">(max:5)</span></label>
+                                <tag-input class="underline" id="taginput" formControlName="Tags" [(ngModel)]="Tags" 
+                                    [separatorKeyCodes]="[32]" (ngModelChange)="onTagsChange(Tags)"
+                                    [class.valid]="TagsCount==5 && 
+        (postForm.get('Tags').dirty || postForm.get('Tags').touched)" [class.invalid]="TagsCount<5 && 
+        (postForm.get('Tags').dirty || postForm.get('Tags').touched)"></tag-input>
+                                        <!-- Error messages -->
+                                        <div class="alert alert-danger"
+                                        *ngIf="TagsCount<5 && postForm.get('Tags').errors && (postForm.get('Tags').dirty || postForm.get('Tags').touched)"
+                                        style="background-color: transparent;border: none;color: red;padding-top: 2px;padding-bottom: 2px;">
+    
+                                        <small class="text-danger" *ngIf="postForm.get('Tags').hasError('required')">
+                                            Tags is required.
+                                        </small>
+                                        <small class="text-danger" *ngIf="TagsCount<5">
+                                           Minimum and maximum 5 tags allowed.
+                                        </small>
+              
+                                    </div>
+                                    <div class="alert alert-success"
+                                    *ngIf="TagsCount==5 && (postForm.get('Tags').dirty || postForm.get('Tags').touched)"
+                                    style="background-color: transparent;border: none;color: rgb(36, 189, 36);padding-top: 2px;padding-bottom: 2px;">
+    
+                                    <div class="text-success" *ngIf="TagsCount==5">
+                                        <!-- <ion-icon style="font-size: 18px !important;" name="checkmark"></ion-icon> -->
+                                        <small>Success</small>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            <!-- <div class="form-group">
+                              <label for="exampleFormControlInput2">Choose Image</label>
+                              <input type="email" formControlName="Image" class="form-control " id="exampleFormControlInput2" placeholder="Last Name">
+                              </div> -->
+
+                            <div class="form-group ">
+                                <button class="form-control" type="submit" [disabled]="postForm.invalid"
+                                    class="btn btn-default rounded btn-block">Create Post</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</ion-content>

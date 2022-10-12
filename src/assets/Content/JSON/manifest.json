@@ -1,0 +1,10 @@
+{
+  "name": "Bizbay",
+  "short_name": "BizbayAPP",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#efefef",
+  "theme_color": "#1d28ad",
+  "orientation": "portrait-primary"
+  
+}

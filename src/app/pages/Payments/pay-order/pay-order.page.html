@@ -1,0 +1,129 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+ 
+      <header class="header">
+        <div class="row">
+        <div class="col-auto px-0">
+          <!-- <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+          <button class="btn btn-40 btn-link back-btn" (click)="nav.goto_back()" type="button">
+            <span class="material-icons">keyboard_arrow_left</span>
+          </button>
+          <h6 class="navbar-dash">Pay Order Payment</h6>
+
+        </div>
+              <div class="ml-auto col-auto pl-0">
+
+                  <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                      <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+                      <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                     
+                  </a>
+              </div>
+            </div>
+          
+          
+      </header>
+      <div class="main-container">
+        <div class="container mb-4">
+            <p class="text-center text-secondary mb-1">Your Account Balance</p>
+            <div class="form-group mb-1">
+                <input type="text" class="form-control large-gift-card" value="Rs:{{AccountBalance}}" readonly  placeholder="0">
+            </div>
+            <p class="text-center text-secondary mb-4">Order Price is: Rs {{OrderData.Price}} </p>
+        </div>
+
+        <div class="container mb-1">
+          <ng-container *ngFor="let item of CardList">
+            <div class="card" *ngIf="isShow==true">
+          <p class="text-center  text-secondary mb-0">Card Added : {{CardAdded}}</p>
+          <p class="text-center  text-secondary mb-0">Last transaction : {{ModifiedOn}}</p>
+                <!-- <div class="card-header">
+                    <div class="row">             
+                    </div>
+                </div> -->
+                <div class="card-body">
+                                <div class="card border-0 bg-default text-white">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <i class="material-icons vm text-template">credit_card</i>
+                                                
+                                                <!-- <div class="col-12 text-left">
+                                                 
+                                                </div> -->
+                                            </div>
+                                            <!-- <h6 class="">Visa</h6> -->
+                                            <div class="col-6 text-right" (click)="presentConfirm(item.key)">
+                                              <i class="material-icons vm text-template avatar-20">cancel</i>
+                                          </div>
+                                         
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="mb-0 mt-3">{{item.CardNo}}</h5>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="mb-0">{{item.ExpiryMonth}}/{{item.ExpiryYear}}</p>
+                                                <p class="small ">Expiry date</p>
+                                            </div>
+                                            <div class="col-auto align-self-center text-right">
+                                                <p class="mb-0">{{item.CardHolderName}}</p>
+                                                <p class="small">Card Holder</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+       
+            </div>
+          </ng-container>
+
+            <div class="card"  *ngIf="isShow==false">
+              <div class="card-header">
+                  <div class="row">
+                      <div class="col-auto">
+          
+                      </div>
+                      <div class="col pl-0 text-center">
+                          <h6 class="subtitle mb-0">Card not found.</h6>
+                      </div>
+           
+                  </div>
+              </div>
+              <div class="card-body" >
+            
+                            <div class="card border-0 bg-white">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <i class="material-icons vm text-template"></i>
+                                        </div>
+                                        <div class="col pl-0 text-center">
+                                          <div class="container text-center" (click)="OpenAddCardModal()">
+                                            <a  class="btn btn-default btn-lg mb-2 mx-auto rounded">Add Card</a>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                      
+                            </div>
+                        <!-- </div>
+               
+                    </div>
+                </div> -->
+            </div>
+          </div>
+        </div>
+   
+        <div class="container text-center mt-3">
+            <a class="btn btn-default btn-lg mb-2 mx-auto rounded" (click)="OrderConfirm()" *ngIf="isShow==true">Pay Now</a>
+        </div>
+    </div>
+
+   
+  </main>
+</ion-content>

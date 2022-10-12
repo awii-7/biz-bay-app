@@ -1,0 +1,81 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+ 
+      <header class="header">
+          <div class="row">         
+              <!-- <h6 class="navbar-dash" style="margin-top: 10px !important;">Review Order</h6> -->
+              <div class="ml-auto col-auto pl-0">
+                  <!-- <a (click)="nav.goto_notification()" class=" btn btn-40 btn-link">
+                      <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+                      <span class="badge" style="padding: 0% !important;">{{this.api.NCount}}</span>
+                     
+                  </a> -->
+              </div>
+          </div>
+          
+      </header>
+    <div class="container-fluid top-50 text-center mb-4">
+        <div class="avatar avatar-140 rounded-circle mx-auto shadow" style="text-align: center;padding-bottom: 10px;border: 5px white solid">
+            <div class="background" *ngIf="this.userData" >
+                <img src="{{this.userData.ProfilePic}}" onerror="this.src='assets/Content/img/defaultprofile.jpg'" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-4 text-center text-white" *ngIf="this.userData">
+        <h6 class="mb-1">{{orderData.InfluencerName}}</h6>
+        <p *ngIf="this.userData.City">{{this.userData.City}}</p>
+        <p class="mb-1">{{this.userData.Email}}</p>
+        <!-- <p>+44 000 000 0000</p> -->
+    </div>
+
+    <div class="main-container">
+
+      <div class="container">
+        <div class="card mb-4">
+          <div class="card-header">
+              <h6 class="subtitle mb-0">
+                     Please review this influencer work.
+              </h6>
+          
+             </div>
+          <div class="card-body">
+                      <div class="form-group float-label active">
+                        <select class="form-control"  [(ngModel)]="Review.ReviewStatus">
+                          <option selected value="Excellent">Excellent</option>
+                          <option value="Good">Good</option>
+                          <option value="NotGood">Not Good</option>
+                          <option value="Bad">Bad</option>
+                          <option value="VeryBad">Very Bad</option>
+                          
+                      </select>
+                    </div>
+              <div class="form-group float-label active">
+                  <textarea type="text" rows="3" autofocus [(ngModel)]="Review.Review" placeholder="Write message here..." class="form-control" ></textarea>
+                  <label class="form-control-label">Comment</label>
+                  <!-- <p class="form-text text-secondary text-right">Visa Debit card</p> -->
+              </div>
+              <div class="form-group active text-center">
+                <ionic5-star-rating #rating  class="removeOutline"
+                  activeIcon = "star"
+                  defaultIcon = "star-outline"
+                  activeColor = "#FFDF00" 
+                  defaultColor = "#e3dede"
+                  readonly="false"
+                  rating="1"
+                  fontSize = "50px"
+                  (ratingChanged)="logRatingChange($event)">
+              </ionic5-star-rating>
+                  </div>
+          </div>
+          <div class="card-footer">
+              <button (click)="SubmitReview()" [disabled]='this.Review.Review==""' class="btn btn-block btn-success rounded">Submit Review</button>
+          </div>
+      </div>
+
+      </div>
+    </div>
+   
+  </main>
+</ion-content>

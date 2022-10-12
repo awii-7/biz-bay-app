@@ -1,0 +1,74 @@
+$white:      #FFF;
+$black:      #000;
+$dark-green: #2FA583;
+$green:      #5AAD45;
+$green-74:   #74DAD2;
+$teal:       #30A69D;
+$grey:       #F7F9FC;
+$dark-gray:  #495B65;
+$black-3:     #3C3D3F;
+
+.bg-img {
+    //--background: url('/assets/images/bg1.jpg') no-repeat  fixed;
+    background: #495B65 !important
+}
+
+.default-page-bg {
+    --background: #f1eefc;
+}
+
+.center-align {
+    width: 100%;
+    text-align: center;
+}
+.right-align {
+    width: 100%;
+    text-align: right;
+}
+.left-align {
+    width: 100%;
+    text-align: left;
+}
+
+.white-text {
+    // color: #FFF
+    color: #000;
+}
+
+.card-header {
+    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 5px !important;
+}
+
+ion-card {
+    margin: 5px 10px 5px 10px !important;
+    padding: 0px !important;
+    --indicator-color : #ff700a;
+    border-radius: 10px;
+}
+ion-card ion-card-header {
+    padding: 10px !important;
+}
+ion-card ion-card-content {
+    padding: 10px !important;
+}
+
+.list-row {
+    padding-bottom: 5px;
+}
+.list-Heading-Col {
+    text-align: left;
+    background-color: #d3d3d3;
+    color: #FFF;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.list-Value-Col {
+    border-color: #d3d3d3;
+    border-width: .01em;
+    border-style: solid;
+    text-align: left;
+}
+

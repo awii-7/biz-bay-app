@@ -1,0 +1,304 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <header class="header">
+      <div class="row">
+        <div class="col-auto px-0">
+          <!-- <ion-menu-button auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+          <button class="btn btn-40 btn-link back-btn" (click)="nav.goto_back()" type="button">
+            <span class="material-icons">keyboard_arrow_left</span>
+          </button>
+          <h6 class="navbar-dash">My Posts</h6>
+
+        </div>
+        <!-- <div class="ml-auto col-auto pl-0">
+          <a href="javascript:void()" class=" btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+          </a>
+        </div> -->
+        <div class="ml-auto col-auto pl-0">
+          <a (click)="nav.goto_notification()" class="btn btn-40 btn-link">
+            <span class="material-icons">notifications_none</span>
+            <span class="counter"></span>
+            <span class="badge" style="padding: 0% !important"
+              >{{this.api.NCount}}</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <ion-segment value="1" mode="md" [(ngModel)]="segment">
+        <ion-segment-button value="all" layout="icon-start">
+          <span class="material-icons">list</span>
+          <ion-label>All Posts</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="approved" layout="icon-start">
+          <span class="material-icons">done_all</span>
+          <ion-label>Approved</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending" layout="icon-start">
+          <span class="material-icons"> hourglass_top</span>
+          <ion-label>Pending</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </header>
+
+    <div class="main-container" *ngIf="segment=='all'" style="margin-top: 50px">
+      <div class="container">
+        <span *ngIf="PostList.length==0" style="text-align: center !important">
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of PostList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i> Post by {{p.UserName}}
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" (click)="deletePost(p.$key)" *ngIf="!p.Status=='C'">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                  <div class="col-6" (click)="nav.goto_postdetail(p.$key)" *ngIf="p.Status=='C'">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: green;
+                        border-color: green;
+                      "
+                      >View Post</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+              >
+                <div
+                  class="views"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span id="heart" class="material-icons text-danger">
+                    favorite</span
+                  >{{this.helper.formatCount(p.TotalLike)}}
+                </div>
+                <div
+                  class="stats"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span class="material-icons">visibility</span
+                  >{{this.helper.formatCount(p.ViewCount)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="main-container"
+      *ngIf="segment=='approved'"
+      style="margin-top: 50px"
+    >
+      <div class="container">
+        <span *ngIf="PostList.length==0" style="text-align: center !important">
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of PostList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card" *ngIf="p.Status=='C'">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i> Post by {{p.UserName}}
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" (click)="deletePost(p.$key)" *ngIf="!p.Status=='C'">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                  <div class="col-6" (click)="nav.goto_postdetail(p.$key)" *ngIf="p.Status=='C'">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: green;
+                        border-color: green;
+                      "
+                      >View Post</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+              >
+                <div
+                  class="views"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span id="heart" class="material-icons text-danger">
+                    favorite</span
+                  >{{this.helper.formatCount(p.TotalLike)}}
+                </div>
+                <div
+                  class="stats"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span class="material-icons">visibility</span
+                  >{{this.helper.formatCount(p.ViewCount)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="main-container"
+      *ngIf="segment=='pending'"
+      style="margin-top: 50px"
+    >
+      <div class="container">
+        <span *ngIf="PostList.length==0" style="text-align: center !important">
+          <h4>No Record Found</h4>
+        </span>
+        <div class="row mb-2" *ngFor="let p of PostList ">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card" *ngIf="p.Status=='P'">
+              <div class="card-body">
+                <h4 class="card-title">{{p.Title}}</h4>
+                <small class="text-muted cat" style="align-items: center">
+                  {{p.CreatedDateTime}}
+                  <i class="fas fa-users text-info"></i> Post by {{p.UserName}}
+                </small>
+                <p class="card-text">{{p.Description}}</p>
+
+                <div class="row">
+                  <div
+                    class="col-6"
+                    style="
+                      display: flex;
+
+                      align-items: center;
+                    "
+                  >
+                    <span class="material-icons text-success">local_offer</span
+                    ><span style="font-weight: bold; font-size: 18px"
+                      >Rs {{p.Price}}</span
+                    >
+                  </div>
+                  <div class="col-6" (click)="deletePost(p.$key)">
+                    <a
+                      class="btn btn-info"
+                      style="
+                        float: right;
+                        background-color: red;
+                        border-color: red;
+                      "
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0"
+              >
+                <div
+                  class="views"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span id="heart" class="material-icons text-danger">
+                    favorite</span
+                  >{{this.helper.formatCount(p.TotalLike)}}
+                </div>
+                <div
+                  class="stats"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <span class="material-icons">visibility</span
+                  >{{this.helper.formatCount(p.ViewCount)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</ion-content>

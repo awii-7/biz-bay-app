@@ -1,0 +1,123 @@
+
+<ion-tabs >  
+
+    <ion-fab vertical="bottom"  horizontal="center" *ngIf="helper.userData.UserType==1" translucent="true">
+      <ion-fab-button (click)="nav.goto_post()">
+        <ion-icon name="add" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom"  horizontal="center" *ngIf="helper.userData.UserType==2" translucent="true">
+      <ion-fab-button (click)="nav.goto_postlist()">
+        <ion-icon name="list"></ion-icon>
+       
+      </ion-fab-button>
+
+    </ion-fab>
+
+    <ion-fab vertical="bottom" tab="influencer_payments"  horizontal="center" *ngIf="helper.userData.UserType==3" translucent="true">
+      <ion-fab-button (click)="nav.goto_Influencer_payment()">
+        <ion-icon name="card-outline"></ion-icon>
+       
+      </ion-fab-button>
+
+    </ion-fab>
+    
+    <ion-tab-bar slot="bottom" class="ion-no-border" *ngIf="helper.userData.UserType==1">
+
+      <ion-tab-button  tab="bizdash">
+        <!-- <ion-icon name="home"></ion-icon> -->
+        <span class="material-icons">home</span>
+        <span style="color:gray !important;"><small>Home</small></span>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="messagelist" class="comments" (click)="nav.goto_conversation()">
+        <!-- <ion-icon name="chatbubbles"></ion-icon> -->
+        <span class="material-icons">chat</span>
+        <ion-badge>5</ion-badge>
+        <span style="color:gray !important;"><small>Chat</small></span>
+      </ion-tab-button>
+  
+       <svg height="50" viewBox="0 0 100 50" width="60" ><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg> 
+  
+      <ion-tab-button tab="myposts"  class="notifs">
+        <!-- <ion-icon name="list"></ion-icon> -->
+        <span class="material-icons">view_list</span>
+        <ion-badge>{{this.helper.TotalPosts}}</ion-badge>
+        <span style="color:gray !important;"><small>My Posts</small></span>
+
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile2">
+        <!-- <ion-icon name="person"></ion-icon> -->
+        <span class="material-icons"> manage_accounts </span>
+        <span style="color:gray !important;"><small>Profile </small></span>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border" *ngIf="helper.userData.UserType==2">
+
+        <ion-tab-button  tab="inflancerdash">
+          <!-- <ion-icon name="home"></ion-icon> -->
+        <span class="material-icons">home</span>
+          <span style="color:gray !important;"><small>Home</small></span>
+        </ion-tab-button>
+  
+      <ion-tab-button tab="messagelist" class="comments" (click)="nav.goto_conversation()">
+        <!-- <ion-icon name="chatbubbles"></ion-icon> -->
+        <span class="material-icons">chat</span>
+        <ion-badge>5</ion-badge>
+        <span style="color:gray !important;"><small>Chat</small></span>
+      </ion-tab-button>
+  
+       <svg height="50" viewBox="0 0 100 50" width="60" ><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg> 
+
+
+      <ion-tab-button tab="orders"   class="notifs">
+        <!-- <ion-icon name="list"></ion-icon> -->
+        <span class="material-icons">view_list</span>
+        <ion-badge>2</ion-badge>
+        <span style="color:gray !important;"><small>Orders</small></span>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile2">
+        <!-- <ion-icon name="person"></ion-icon> -->
+        <span class="material-icons"> manage_accounts </span>
+        <span style="color:gray !important;"><small>Profile </small></span>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+
+
+    <ion-tab-bar slot="bottom" class="ion-no-border" *ngIf="helper.userData.UserType==3">
+
+      <ion-tab-button  tab="admindash">
+        <!-- <ion-icon name="home"></ion-icon> -->
+      <span class="material-icons">home</span>
+        <span style="color:gray !important;"><small>Home</small></span>
+      </ion-tab-button>
+
+    <ion-tab-button tab="userslist" class="comments" >
+      <!-- <ion-icon name="chatbubbles"></ion-icon> -->
+      <span class="material-icons">people</span>
+      <!-- <ion-badge>5</ion-badge> -->
+      <span style="color:gray !important;"><small>Users</small></span>
+    </ion-tab-button>
+
+     <svg height="50" viewBox="0 0 100 50" width="60" ><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg> 
+
+
+    <ion-tab-button tab="orders"   class="notifs">
+      <!-- <ion-icon name="list"></ion-icon> -->
+      <!-- <span class="material-icons">view_list</span> -->
+      <span class="material-icons">pie_chart</span>
+      <span style="color:gray !important;"><small>Statistics</small></span>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile2">
+      <!-- <ion-icon name="person"></ion-icon> -->
+      <span class="material-icons"> manage_accounts </span>
+      <span style="color:gray !important;"><small>Profile </small></span>
+    </ion-tab-button>
+  </ion-tab-bar>
+  </ion-tabs>

@@ -1,0 +1,74 @@
+
+<ion-content>
+    <main class="flex-shrink-0 main has-footer">
+    <!-- Fixed navbar -->
+    <header class="header">
+        <div class="row">
+            <div class="col-auto px-0">
+              <ion-menu-button   auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> 
+              <h6 class="navbar-dash">Feedback</h6>
+            </div>
+            <!-- <div class="text-left col align-self-center">
+                <a class="navbar-brand" href="#">
+                    <h6 class="mb-0">Dashboard</h6>
+                </a>
+            </div> -->
+            <div class="ml-auto col-auto pl-0">
+                <button type="button" class="btn btn-link btn-40 colorsettings">
+                    <span class="material-icons">color_lens</span>
+                </button>
+                <a href="notification.html" class=" btn btn-40 btn-link" >
+                    <span class="material-icons">notifications_none</span>
+                    <span class="counter"></span>
+                </a>
+                <!-- <a href="notification.html" class=" btn btn-40 btn-link" >
+                      <span class="material-icons">chat</span>
+                      <span class="counter"></span>
+                  </a> -->
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">Write Feedback</h4>
+                </div>
+                <div class="card-body">
+                    <form>                 
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Name</label>
+                            <input type="text" class="form-control"  [(ngModel)]="Name" name="bfname"  placeholder="Full Name">
+                            <!-- <p class="form-text valid-feedback">Please enter correct password</p> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email</label>
+                            <input type="text" class="form-control"  [(ngModel)]="Email" name="bfname"  placeholder="Email">
+                            <!-- <p class="form-text valid-feedback">Please enter correct password</p> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput2">Subject</label>
+                            <input type="email" class="form-control" [(ngModel)]="Subject" name="blname" id="exampleFormControlInput2" placeholder="Subject">
+                            <!-- <p class="form-text invalid-feedback">Please enter correct password</p> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput2">Message</label>
+                            <textarea type="text" class="form-control" rows="6" [(ngModel)]="Message" name="baddress" id="exampleFormControlInput2" placeholder="Write message here"></textarea>
+                            <!-- <p class="form-text invalid-feedback">Please enter correct password</p> -->
+                        </div>
+                    </form>
+                    <div class="ml-auto col-auto align-self-center" (click)="SendFeedback(Name,Email,Subject,Message)">          
+                        <button  class="btn btn-default rounded btn-block">Update Profile</button>  
+                   </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+   
+  </main>
+  </ion-content>
+<app-tabs></app-tabs>
+  
+  

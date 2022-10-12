@@ -1,0 +1,189 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu [swipeGesture]="Toogle" contentId="main-content" type="overlay">
+      <!-- menu main -->
+      <div class="main-menu2">
+        <div class="row mb-4 no-gutters">
+          <div class="col-auto">
+            <button
+              (click)="CloseMenu()"
+              class="btn btn-link btn-40 btn-close text-white"
+            >
+              <span class="material-icons">chevron_left</span>
+            </button>
+          </div>
+          <div class="col-auto" style="align-self: center">
+            <div class="avatar avatar-60 rounded-circle position-relative">
+              <figure class="background" style="margin: 0">
+                <img
+                  [src]="this.helper.userData.ProfilePic"
+                  onerror="this.src='assets/Content/img/user3.png'"
+                  alt=""
+                />
+              </figure>
+            </div>
+          </div>
+          <div class="col pl-3 text-left align-self-center">
+            <h6 class="mb-1" *ngIf="this.helper.userData.UserType == '1'">
+              {{ this.helper.userData.FirstName }}&nbsp;&nbsp;&nbsp;
+              <span>
+                <small class="text-warning">
+                  <span class="material-icons icon" style="font-size: small"
+                    >done_all</span
+                  >
+                  <small>Verified</small>
+                </small>
+              </span>
+            </h6>
+            <h6 class="mb-1" *ngIf="this.helper.userData.UserType == '2'">
+              {{ this.helper.userData.FirstName }}&nbsp;
+              <span>
+                <small class="text-warning"
+                  ><ion-icon name="star" class="checkedstar"></ion-icon>&nbsp;{{
+                    this.helper.userData.Rating
+                  }}({{ this.helper.userData.OrderCount }})</small
+                >
+              </span>
+            </h6>
+            <p
+              class="small text-default-secondary"
+              *ngIf="this.helper.userData.UserType == '1'"
+            >
+              Business Account
+            </p>
+            <p
+              class="small text-default-secondary"
+              *ngIf="this.helper.userData.UserType == '2'"
+            >
+              Inflauncer Account
+            </p>
+          </div>
+        </div>
+        <div class="menu-container">
+          <div class="row mb-4" *ngIf="this.helper.userData.UserType=='2'">
+                <div class="col">
+                    <h4 class="mb-1 font-weight-normal">Rs {{MyWallet}}</h4>
+                    <p class="text-default-secondary">My Balance</p>
+                </div>
+                <div class="col-auto" style="margin-top: 16px;">
+                    <button (click)="nav.goto_wallet(0)" class="btn btn-default btn-40 rounded-circle" data-toggle="modal" data-target="#addmoney"><i class="material-icons">add</i></button>
+                </div>
+            </div>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                (click)="
+                  this.helper.userData.UserType == 1
+                    ? nav.goto_bizdash()
+                    : nav.goto_inflancerdash()
+                "
+              >
+                <div>
+                  <span class="material-icons icon">dashboard</span>
+                  Dashboard
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+
+            <li
+              class="nav-item"
+              (click)="goto_mypost()"
+              *ngIf="this.helper.userData.UserType == '1'"
+            >
+              <a class="nav-link">
+                <div>
+                  <span class="material-icons icon">request_page</span>
+                  My Posts
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+
+            <li
+              class="nav-item"
+              (click)="nav.goto_postlist()"
+              *ngIf="this.helper.userData.UserType == '2'"
+            >
+              <a class="nav-link">
+                <div>
+                  <span class="material-icons icon">request_page</span>
+                  View Posts
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+
+            <li class="nav-item" *ngIf="this.helper.userData.UserType == '2'">
+              <a class="nav-link" (click)="nav.goto_myproposal()">
+                <div>
+                  <span class="material-icons icon">request_page</span>
+                  Sent Proposals
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="this.helper.userData.UserType == '1'">
+              <a class="nav-link" (click)="nav.goto_recivedproposals()">
+                <div>
+                  <span class="material-icons icon">request_page</span>
+                  Recived Proposals
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="nav.goto_ordersList()">
+                <div *ngIf="this.helper.userData.UserType == '1'">
+                  <span class="material-icons icon">shopping_bag</span>
+                  Orders
+                </div>
+                <div *ngIf="this.helper.userData.UserType == '2'">
+                  <span class="material-icons icon">shopping_bag</span>
+                  My Orders
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <div>
+                  <span class="material-icons icon">perm_contact_calendar</span>
+                  Refer Friends
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link">
+                <div>
+                  <span class="material-icons icon">settings</span>
+                  Settings
+                </div>
+                <span class="arrow material-icons">chevron_right</span>
+              </a>
+            </li>
+          </ul>
+          <div class="text-center" (click)="nav.logout()">
+            <a class="btn btn-outline-danger text-white rounded my-3 mx-auto"
+              >Sign out</a
+            >
+          </div>
+        </div>
+        <div class="text-center footer" style="background: #3629b7">
+          <small class="text-warning"
+            >Registered : {{ this.helper.userData.CreatedOn.split(" ")[0] }} ({{
+              this.helper.RelativeTime(this.helper.userData.CreatedOn)
+            }})</small
+          >
+        </div>
+      </div>
+
+      <div class="backdrop"></div>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"> </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

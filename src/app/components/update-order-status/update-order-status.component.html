@@ -1,0 +1,51 @@
+<ion-content>
+  <main class="flex-shrink-0 main has-footer">
+    <div class="main-container">
+
+      <div class="container">
+        <div class="card mb-4">
+          <div class="card-header">
+            <!-- <ion-icon name="clear" ></ion-icon> -->
+            <span class="material-icons text-danger" (click)="Dismiss()" style="float: right !important;" slot="end">
+              clear
+              </span>
+            <h6 class="mb-0" >OrderNo   <b>{{OrderDetail.OrderNo}}</b></h6><br>
+            <small>Order completed {{OrderDetail.ProgressPercentage}}%</small>
+            <div class="progress-bar" role="progressbar" [style.width.%]="OrderDetail.ProgressPercentage" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">{{OrderDetail.ProgressPercentage}}%</div> 
+                      
+          </div>
+          <div class="card-body">
+
+            <form [formGroup]="orderForm" (ngSubmit)="formSubmit(orderForm.value)">
+              <div class="form-group">
+                <label for="exampleFormCon trolInput2">What's Update</label>
+                <textarea type="" formControlName="description" rows="4" class="form-control "
+                  id="exampleFormControlInput2" placeholder="Description" ></textarea>
+
+                
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Progress Percentage</label>
+                <ion-select formControlName="ProgressPercentage" class="form-control " name="purchasecustomer"
+                  required="true" placeholder="Select Progress">
+                  <ion-select-option *ngFor="let items of OrderPercentage" [value]="item">{{items}}%
+                  </ion-select-option>
+                </ion-select>
+
+              </div>
+              <div class="form-group ">
+                <button class="form-control" type="submit" [disabled]="orderForm.invalid"
+                  class="btn btn-default rounded btn-block">Update Status</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</ion-content>

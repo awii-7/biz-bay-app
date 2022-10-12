@@ -1,0 +1,68 @@
+<ion-content>
+ <!-- Loading Component -->
+<!-- <app-loading></app-loading> -->
+    <!-- screen loader -->
+    <!-- <div class="container-fluid h-100 loader-display">
+            <div class="row h-100">
+                <div class="align-self-center col">
+                    <div class="logo-loading">
+                        <div class="icon icon-100 mb-4 rounded-circle">
+                            <img src="assets/Content/img/favicon144.png" alt="" class="w-100">
+                        </div>
+                        <h4 class="text-default">Bizbay</h4>spelling bta
+                        <p class="text-secondary">Grow Your Business</p>
+                        <div class="loader-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+ <!-- Begin page content -->
+ <main class="flex-shrink-0 main has-footer">
+    <!-- Fixed navbar -->
+    <ion-header class="header">
+        <div class="row">
+            <div class="col-auto px-0">
+                <!-- <ion-menu-button   auto-hide="false" slot="start" style="float: left;color: #ffffff"></ion-menu-button> -->
+            </div>
+            <div class="text-left col align-self-center">
+               <h4 class="text-white">Login</h4>
+            </div>
+            <!-- <div class="ml-auto col-auto align-self-center" (click)="goto_signup()">
+                <button  class="btn btn-default rounded btn-block"> Sign up</button>  
+            </div> -->
+        </div>
+    </ion-header>
+    <div class="container h-100 text-white">
+        <div class="row h-100">
+            <div class="col-12 align-self-center mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                         <h2 class="font-weight-normal mb-5"></h2> 
+                        <div class="form-group float-label active">
+                            <input type="text" class="form-control text-white" [(ngModel)]="LoginData.UserData.Email" >
+                            <label class="form-control-label text-white">Email</label>
+                        </div>
+                        <div class="form-group float-label active">
+                            <input type="password" class="form-control text-white " [(ngModel)]="LoginData.UserData.Password">
+                            <label class="form-control-label text-white">Password</label>
+                        </div>  
+                        <p class="text-right"><a (click)="goto_forgotpassword()" class="text-white">Forgot Password?</a></p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            <a (click)="Login()" class="btn btn-default rounded btn-block">Login</a>
+            <a (click)="goto_signup()" class="btn btn-default rounded btn-block">Signup</a>
+        </div>
+    </div>
+</main>
+</ion-content>

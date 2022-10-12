@@ -1,0 +1,15 @@
+{
+  "name": "bizbay",
+  "integrations": {
+    "cordova": {
+      "enabled": true
+    }
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://bizbayapp.000webhostapp.com/"
+    }
+  ]
+}
